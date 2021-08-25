@@ -1,3 +1,4 @@
+<h1>注: 现仓库内代码未包含.env环境配置文件，请自行添加并生成APP_KEY，谢谢。</h1>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
