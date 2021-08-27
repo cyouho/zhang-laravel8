@@ -5,7 +5,7 @@
         <!-- Split dropup button -->
         <div class="btn-group dropup float-right">
             <button type="button" class="btn btn-secondary btn-sm">
-                English
+                简体中文
             </button>
             <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="sr-only">Toggle Dropdown</span>

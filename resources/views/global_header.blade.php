@@ -4,10 +4,10 @@
             CYOUHO</a>
     </h5>
     <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="../en/my_resume.html">My resume</a>
-        <a class="p-2 text-dark" href="https://github.com/cyouho" target="_blank">My GitHub</a>
-        <a class="p-2 text-dark" href="../en/about_site.html">About this site</a>
-        <a class="p-2 text-dark" href="../en/sign_in.html">Sign in</a>
+        <a class="p-2 text-dark" href="../en/my_resume.html">测试按钮</a>
+        <a class="p-2 text-dark" href="https://github.com/cyouho" target="_blank">我的GitHub</a>
+        <a class="p-2 text-dark" href="../en/about_site.html">测试按钮</a>
+        <a class="p-2 text-dark" href="../en/sign_in.html">登录</a>
     </nav>
-    <a class="btn btn-outline-primary" href="../en/sign_up.html">Sign up</a>
+    <a class="btn btn-outline-primary" href="../en/sign_up.html">注册</a>
 </div>
