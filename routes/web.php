@@ -26,6 +26,7 @@ Route::get('/index', [
     IndexController::class, 'index'
 ]);
 
+//登录页面的路由，包含登录验证中间件
 Route::get('login', function () {
     return view('login.login');
 })->middleware('login');
