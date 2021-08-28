@@ -25,3 +25,7 @@ Route::get('/', [
 Route::get('/index', [
     IndexController::class, 'index'
 ]);
+
+Route::get('login', function () {
+    return view('login.login');
+})->middleware('login');
