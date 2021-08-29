@@ -9,5 +9,5 @@
         <a class="p-2 text-dark" href="../en/about_site.html">测试按钮</a>
         <a class="btn btn-outline-secondary" href="/login">登录</a>
     </nav>
-    <a class="btn btn-outline-primary" href="../en/sign_up.html">注册</a>
+    <a class="btn btn-outline-primary" href="/register">注册</a>
 </div>

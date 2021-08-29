@@ -27,6 +27,10 @@ Route::get('/index', [
 ]);
 
 //登录页面的路由，包含登录验证中间件
-Route::get('login', function () {
+Route::get('login', function() {
     return view('login.login');
 })->middleware('login');
+
+Route::get('register', function(){
+    return view('register.register');
+});

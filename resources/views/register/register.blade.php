@@ -10,16 +10,19 @@
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="../public/js/index.js"></script>
 </head>
 
 <body>
     <form class="form-signin">
         <div class="text-center mb-4">
             <h1 class="my-0 mr-md-auto font-weight-normal">
-                <a class="navbar-brand text-dark" href="/">
+                <a class="navbar-brand text-dark" href="index">
                     CYOUHO</a>
             </h1>
+            <h5 class="my-0 mr-md-auto font-weight-normal">
+                <p class="navbar-brand text-dark">
+                    创建新账户</p>
+            </h5>
         </div>
 
         <div class="form-label-group">
@@ -32,14 +35,9 @@
             <label for="inputPassword">登录密码</label>
         </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> 记住我
-            </label>
-        </div>
-        <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <button id="login" class="btn btn-lg btn-success btn-block" type="submit">创建</button>
         <p class="login-callout mt-3">
-            没有账号？<a href="../sign_up.html">创建一个</a>
+            已经拥有账户？<a href="login">登录</a>
         </p>
         <p class="mt-5 mb-3 text-muted text-center">This site was created by CYOUHO with &copy; Bootstrap 4!</p>
     </form>
