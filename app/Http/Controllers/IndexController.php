@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use View;
+use DB;
 
 /**
  * ホームページclass
@@ -14,6 +15,7 @@ class IndexController extends Controller
      */
     public function index()
     {
+        //return DB::select('select * from connect_test.connect_table');
         return view('index.index');
     }
 }
