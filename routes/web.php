@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\BaiduImageSearchController;
+use App\Http\Controllers\ImageSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +28,15 @@ Route::get('/index', [
 ]);
 
 Route::get('/baidu', [
-    BaiduImageSearchController::class, 'index'
+    ImageSearchController::class, 'baidu'
 ]);
 
 //登录页面的路由，包含登录验证中间件
-Route::get('login', function() {
+Route::get('login', function () {
     return view('login.login');
 })->middleware('login');
 
 //注册页面的路由
-Route::get('register', function(){
+Route::get('register', function () {
     return view('register.register');
 });

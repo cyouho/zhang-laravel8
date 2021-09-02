@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use View;
 
-class BaiduImageSearchController extends Controller
+class ImageSearchController extends Controller
 {
-    public function index() {
+    public function baidu()
+    {
         return view('imgsearch.baidu');
     }
 }
