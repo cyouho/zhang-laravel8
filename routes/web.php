@@ -40,3 +40,7 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('register.register');
 });
+
+Route::get('1688', [
+    ImageSearchController::class, 'onesix'
+]);
