@@ -51,7 +51,7 @@
                         <p class="card-text">Alibaba（国际） 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/alibaba')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-16</small>
                         </div>

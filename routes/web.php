@@ -27,8 +27,19 @@ Route::get('/index', [
     IndexController::class, 'index'
 ]);
 
+//百度以图搜图页面路由
 Route::get('/baidu', [
     ImageSearchController::class, 'baidu'
+]);
+
+//1688以图搜图页面路由
+Route::get('1688', [
+    ImageSearchController::class, 'onesix'
+]);
+
+//Alibaba(国际)以图搜图
+Route::get('alibaba', [
+    ImageSearchController::class, 'alibaba'
 ]);
 
 //登录页面的路由，包含登录验证中间件
@@ -40,7 +51,3 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('register.register');
 });
-
-Route::get('1688', [
-    ImageSearchController::class, 'onesix'
-]);
