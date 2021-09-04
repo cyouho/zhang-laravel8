@@ -1,6 +1,3 @@
-<h1 colour=red>声明: 本仓库内代码仅供学习交流使用，请勿用于商业用途，谢谢。</h1></br>
-<h1>注1: 现仓库内代码未包含.env环境配置文件，请自行添加并生成APP_KEY，谢谢。</h1></br>
-<h1>注2: 数据库的链接设置也要自己在,env里配置，谢谢。</h1>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -9,6 +6,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## About This Repository
+- 本仓库代码仅供学习交流使用，请勿用于商业用途，谢谢。
+- 注1: 现仓库内代码未包含.env环境配置文件，请自行添加并生成APP_KEY，谢谢。
+- 注2: 数据库的链接设置也要自己在,env里配置，谢谢。
 
 ## About Laravel
 
