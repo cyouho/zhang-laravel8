@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <form class="form-signin">
+    <form class="form-signin" action="/dologin" method="POST">
+        @csrf
         <div class="text-center mb-4">
             <h1 class="my-0 mr-md-auto font-weight-normal">
                 <a class="navbar-brand text-dark" href="/">
@@ -23,12 +24,12 @@
         </div>
 
         <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" name="login_email" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputEmail">电子邮箱地址</label>
         </div>
 
         <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" id="inputPassword" name="login_pwd" class="form-control" placeholder="Password" required>
             <label for="inputPassword">登录密码</label>
         </div>
 
@@ -39,7 +40,7 @@
         </div>
         <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         <p class="login-callout mt-3">
-            没有账号？<a href="../sign_up.html">创建一个</a>
+            没有账号？<a href="/register">创建一个</a>
         </p>
         <p class="mt-5 mb-3 text-muted text-center">This site was created by CYOUHO with &copy; Bootstrap 4!</p>
     </form>
