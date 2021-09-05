@@ -49,6 +49,7 @@ Route::get('login', [
     LoginController::class, 'index'
 ]);
 
+//登录逻辑
 Route::post('dologin', [
     LoginController::class, 'doLogin'
 ]);
@@ -58,6 +59,7 @@ Route::get('register', [
     RegisterController::class, 'index'
 ]);
 
+//注册逻辑
 Route::post('doregister', [
     RegisterController::class, 'doRegister'
 ]);
