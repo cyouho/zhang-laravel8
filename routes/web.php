@@ -31,21 +31,21 @@ Route::get('/index', [
 
 //百度以图搜图页面路由
 Route::get('/baidu', [
-    ImageSearchController::class, 'baidu'
+    ImageSearchController::class, 'showBaiduImageSearchHomePage'
 ]);
 
 //1688以图搜图页面路由
 Route::get('1688', [
-    ImageSearchController::class, 'onesix'
+    ImageSearchController::class, 'showOnesixImageSearchHomePage'
 ]);
 
 //Alibaba(国际)以图搜图
 Route::get('alibaba', [
-    ImageSearchController::class, 'alibaba'
+    ImageSearchController::class, 'showAlibabaImageSearchHomePage'
 ]);
 
 Route::get('taobao', [
-    ImageSearchController::class, 'taobao'
+    ImageSearchController::class, 'showTaobaoImageSearchHomePage'
 ]);
 
 //登录页面的路由
