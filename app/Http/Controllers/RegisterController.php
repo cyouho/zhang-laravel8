@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /**
-     * return register page.
+     * register page.
      */
     public function index()
     {

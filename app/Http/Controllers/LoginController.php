@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
 {
     /**
-     * return login page.
+     * login page.
      */
     public function index()
     {
