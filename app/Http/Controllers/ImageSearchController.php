@@ -25,39 +25,27 @@ class ImageSearchController extends Controller
     }
 
     /**
-     * Show image search home page for baidu.
+     * Select which site will be shown.
      */
-    public function showBaiduImageSearchHomePage()
+    public function showSiteImageSearchHomePage($site = 'others')
     {
-        return view('imgsearch.baidu');
-    }
-
-    /**
-     * Show image search home page for 1688.
-     */
-    public function showOnesixImageSearchHomePage()
-    {
-        return view('imgsearch.1688');
-    }
-
-    /**
-     * Show image search home page for alibaba.
-     */
-    public function showAlibabaImageSearchHomePage()
-    {
-        return view('imgsearch.alibaba');
-    }
-
-    /**
-     * Show image search home page for taobao.
-     */
-    public function showTaobaoImageSearchHomePage()
-    {
-        return view('imgsearch.taobao');
-    }
-
-    private function getDefaultSiteUrl($site)
-    {
+        switch ($site) {
+            case 'baidu':
+                return view('imgsearch.baidu');
+                break;
+            case '1688':
+                return view('imgsearch.1688');
+                break;
+            case 'alibaba':
+                return view('imgsearch.alibaba');
+                break;
+            case 'taobao':
+                return view('imgsearch.taobao');
+                break;
+            default:
+                return redirect('/');
+                break;
+        }
     }
 
     /**
