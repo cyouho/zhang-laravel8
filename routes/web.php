@@ -44,6 +44,10 @@ Route::get('alibaba', [
     ImageSearchController::class, 'alibaba'
 ]);
 
+Route::get('taobao', [
+    ImageSearchController::class, 'taobao'
+]);
+
 //登录页面的路由
 Route::get('login', [
     LoginController::class, 'index'

@@ -22,4 +22,9 @@ class ImageSearchController extends Controller
     {
         return view('imgsearch.alibaba');
     }
+
+    public function taobao()
+    {
+        return view('imgsearch.taobao');
+    }
 }

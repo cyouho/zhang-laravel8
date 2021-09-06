@@ -68,7 +68,7 @@
                         <p class="card-text">淘宝 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('https://developer.mozilla.org/ja/docs/Web/API/Document')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/taobao')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-19</small>
                         </div>
