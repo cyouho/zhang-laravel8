@@ -49,11 +49,15 @@ class ImageSearchController extends Controller
         }
     }
 
+    public function selectImageSearchSite()
+    {
+    }
+
     /**
      * get Image search URL function for baidu.
      * (use guzzle client)
      */
-    public function test()
+    public function getBaiduImageSearchUrl()
     {
         $client = new Client();
 
