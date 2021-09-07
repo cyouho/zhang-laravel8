@@ -57,5 +57,5 @@ Route::post('doregister', [
 ]);
 
 Route::get('test', [
-    ImageSearchController::class, 'test'
+    ImageSearchController::class, 'getBaiduImageSearchUrl'
 ]);
