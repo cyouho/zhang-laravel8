@@ -17,7 +17,7 @@
                         <p class="card-text">百度 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/baidu')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/imgsearch/baidu')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-16</small>
                         </div>
@@ -34,7 +34,7 @@
                         <p class="card-text">1688 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/1688')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/imgsearch/1688')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-16</small>
                         </div>
@@ -51,7 +51,7 @@
                         <p class="card-text">Alibaba（国际） 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/alibaba')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/imgsearch/alibaba')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-16</small>
                         </div>
@@ -68,7 +68,7 @@
                         <p class="card-text">淘宝 以图搜图</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/taobao')">点击开始</button>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="window.open('/imgsearch/taobao')">点击开始</button>
                             </div>
                             <small class="text-muted">2020-11-19</small>
                         </div>
