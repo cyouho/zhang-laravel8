@@ -55,3 +55,7 @@ Route::get('register', [
 Route::post('doregister', [
     RegisterController::class, 'doRegister'
 ]);
+
+Route::get('test', [
+    ImageSearchController::class, 'test'
+]);
