@@ -29,6 +29,10 @@ Route::get('/index', [
     IndexController::class, 'index'
 ]);
 
+Route::get('/index2', [
+    IndexController::class, 'index2'
+]);
+
 /**
  * 百度, 1688, Alibaba国际, 淘宝的以图搜图路由
  */

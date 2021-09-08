@@ -22,7 +22,7 @@ class ImageSearchController extends Controller
      */
     public function __construct()
     {
-        $this->_defaultSiteUrls = config('siteurls.imageSearch');
+        $this->_imgSearchSiteUrls = config('siteurls.imageSearch');
     }
 
     /**
@@ -49,29 +49,55 @@ class ImageSearchController extends Controller
         }
     }
 
-    public function selectImageSearchSite()
+    public function imageSearch($image, $site)
     {
+        switch ($site) {
+            case 'baidu':
+                $url = $this->getBaiduImageSearchUrl($image, $site);
+                break;
+            default:
+                return redirect('/');
+                break;
+        }
+        echo $url;
     }
 
     /**
      * get Image search URL function for baidu.
      * (use guzzle client)
      */
-    public function getBaiduImageSearchUrl()
+    public function getBaiduImageSearchUrl($image, $site)
+    {
+        $baiduImgPostHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
+        $postData = [
+            'image'    => '',
+            'postHost' => $baiduImgPostHost,
+            'site'     => 'baidu'
+        ];
+
+        $response = $this->postData($postData);
+
+        //dd(json_decode($response->getBody()->getContents(), true));
+
+        return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
+    }
+
+    public function getOnesixImageSearchUrl()
+    {
+    }
+
+    /**
+     * 
+     */
+    private function postData($postData = [])
     {
         $client = new Client();
-
-        $baiduImgPostHost = $this->_defaultSiteUrls['postHost']['baidu'];
-
-        $response = $client->request('POST', $baiduImgPostHost, [
+        $response = $client->request('POST', $postData['postHost'], [
             'form_params'  => [
                 'from'  => 'pc',
                 'image' => 'https://m.media-amazon.com/images/I/31qDK-brVYL._SL500_.jpg'
             ]
         ]);
-
-        //dd(json_decode($response->getBody()->getContents(), true));
-
-        return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
+        return $response;
     }
 }
