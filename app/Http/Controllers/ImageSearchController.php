@@ -49,8 +49,11 @@ class ImageSearchController extends Controller
         }
     }
 
-    public function imageSearch($image, $site)
+    public function imageSearch(Request $request)
     {
+        $data = $request->post();
+        $site = $data['site'];
+        $image = $data['imageUrl'];
         switch ($site) {
             case 'baidu':
                 $url = $this->getBaiduImageSearchUrl($image, $site);
@@ -59,7 +62,7 @@ class ImageSearchController extends Controller
                 return redirect('/');
                 break;
         }
-        echo $url;
+        return response()->json($url);
     }
 
     /**

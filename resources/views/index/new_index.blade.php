@@ -1,7 +1,9 @@
 <html>
-<header>
+
+<head>
     @include('global_header')
-</header>
+    @include('index.index_unique_header')
+</head>
 
 <body>
     @include('global_navbar')
