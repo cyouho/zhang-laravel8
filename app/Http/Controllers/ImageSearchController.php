@@ -73,9 +73,9 @@ class ImageSearchController extends Controller
     {
         $baiduImgPostHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
         $postData = [
-            'image'    => '',
+            'image'    => $image,
             'postHost' => $baiduImgPostHost,
-            'site'     => 'baidu'
+            'site'     => $site
         ];
 
         $response = $this->postData($postData);
@@ -98,7 +98,7 @@ class ImageSearchController extends Controller
         $response = $client->request('POST', $postData['postHost'], [
             'form_params'  => [
                 'from'  => 'pc',
-                'image' => 'https://m.media-amazon.com/images/I/31qDK-brVYL._SL500_.jpg'
+                'image' => $postData['image']
             ]
         ]);
         return $response;
