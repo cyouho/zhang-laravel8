@@ -1,13 +1,8 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm container">
-    <h5 class="my-0 mr-md-auto font-weight-normal">
-        <a class="navbar-brand text-dark" href="/">
-            CYOUHO</a>
-    </h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="../en/my_resume.html">测试按钮</a>
-        <a class="p-2 text-dark" href="https://github.com/cyouho" target="_blank">我的GitHub</a>
-        <a class="p-2 text-dark" href="../en/about_site.html">测试按钮</a>
-        <a class="btn btn-outline-secondary" href="/login">登录</a>
-    </nav>
-    <a class="btn btn-outline-primary" href="/register">注册</a>
-</div>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Hello Feng Jiaxi</title>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/index_contents.css">
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
