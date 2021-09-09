@@ -22,11 +22,11 @@ use App\Http\Controllers\RegisterController;
 // });
 
 Route::get('/', [
-    IndexController::class, 'index'
+    IndexController::class, 'index2'
 ]);
 
 Route::get('/index', [
-    IndexController::class, 'index'
+    IndexController::class, 'index2'
 ]);
 
 Route::get('/index2', [

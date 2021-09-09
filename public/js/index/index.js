@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("#baidu").click(function () {
         site = $("#baidu").attr("value");
         imageUrl = $("#imageUrl").val();
-        if (typeof (exp) == "undefined") {
+        if (imageUrl == '') {
             alert("尚未填写图片地址!");
             return false;
         }
