@@ -71,10 +71,10 @@ class ImageSearchController extends Controller
      */
     public function getBaiduImageSearchUrl($image, $site)
     {
-        $baiduImgPostHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
+        $postHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
         $postData = [
             'image'    => $image,
-            'postHost' => $baiduImgPostHost,
+            'postHost' => $postHost,
             'site'     => $site
         ];
         $formData = [
@@ -90,8 +90,18 @@ class ImageSearchController extends Controller
         return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
     }
 
-    public function getOnesixImageSearchUrl()
+    public function getOnesixImageSearchUrl($image, $site)
     {
+        $postHostForTimestamp = $this->_imgSearchSiteUrls['postHost']['onesix']['timestamp'];
+        $postDataForTimestamp = [
+            'postHost' => $postHostForTimestamp,
+            'site'     => $site
+        ];
+        $formDataForTimestamp = [
+            'serviceIds' => 'cbu.searchweb.config.system.currenttime',
+            'outfmt'     => 'json'
+        ];
+        $timestampResponse = $this->executePost($postDataForTimestamp, $formDataForTimestamp);
     }
 
     /**
