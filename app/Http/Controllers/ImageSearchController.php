@@ -58,6 +58,9 @@ class ImageSearchController extends Controller
             case 'baidu':
                 $url = $this->getBaiduImageSearchUrl($image, $site);
                 break;
+            case 'onesix':
+                $url = $this->getOnesixImageSearchUrl($image, $site);
+                break;
             default:
                 return redirect('/');
                 break;
@@ -71,7 +74,7 @@ class ImageSearchController extends Controller
      */
     public function getBaiduImageSearchUrl($image, $site)
     {
-        $postHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
+        $postHost = $this->_imgSearchSiteUrls['baidu']['postHost'];
         $postData = [
             'image'    => $image,
             'postHost' => $postHost,
@@ -92,16 +95,20 @@ class ImageSearchController extends Controller
 
     public function getOnesixImageSearchUrl($image, $site)
     {
-        $postHostForTimestamp = $this->_imgSearchSiteUrls['postHost']['onesix']['timestamp'];
+        $postHostForTimestamp = $this->_imgSearchSiteUrls['onesix']['postHost']['timestamp'];
+        $serviceIds = $this->_imgSearchSiteUrls['onesix']['serviceIds'];
         $postDataForTimestamp = [
             'postHost' => $postHostForTimestamp,
             'site'     => $site
         ];
         $formDataForTimestamp = [
-            'serviceIds' => 'cbu.searchweb.config.system.currenttime',
+            'serviceIds' => $serviceIds,
             'outfmt'     => 'json'
         ];
         $timestampResponse = $this->executePost($postDataForTimestamp, $formDataForTimestamp);
+
+        dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
+        return json_decode($timestampResponse->getBody()->getContents(), true);
     }
 
     /**
