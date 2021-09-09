@@ -77,10 +77,15 @@ class ImageSearchController extends Controller
             'postHost' => $baiduImgPostHost,
             'site'     => $site
         ];
+        $formData = [
+            'from' => 'pc',
+            'image' => $image
+        ];
 
-        $response = $this->postData($postData);
+        $response = $this->executePost($postData, $formData);
 
         //dd(json_decode($response->getBody()->getContents(), true));
+        // 测试图片链接: https://m.media-amazon.com/images/I/31qDK-brVYL._SL500_.jpg
 
         return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
     }
@@ -92,14 +97,11 @@ class ImageSearchController extends Controller
     /**
      * 
      */
-    private function postData($postData = [])
+    private function executePost($postData = [], $formData = [])
     {
         $client = new Client();
         $response = $client->request('POST', $postData['postHost'], [
-            'form_params'  => [
-                'from'  => 'pc',
-                'image' => $postData['image']
-            ]
+            'form_params'  => $formData
         ]);
         return $response;
     }
