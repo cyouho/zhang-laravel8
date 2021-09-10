@@ -107,8 +107,24 @@ class ImageSearchController extends Controller
         ];
         $timestampResponse = $this->executePost($postDataForTimestamp, $formDataForTimestamp);
 
-        dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
-        return json_decode($timestampResponse->getBody()->getContents(), true);
+        $timestamp = (string)json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet'];
+        $appKey = base64_encode('pc_tusou' . ';' . $timestamp);
+        $postHostForSign = $this->_imgSearchSiteUrls['onesix']['postHost']['sign'];
+        $postDataForSign = [
+            'postHost' => $postHostForSign,
+            'site'     => $site
+        ];
+        $formDataForSign = [
+            'appName' => 'pc_tusou',
+            'appKey'  => $appKey
+        ];
+        $signResponse = $this->executePost($postDataForSign, $formDataForSign);
+        dd($appKey);
+        dd($postHostForSign . http_build_query($formDataForSign));
+        dd(json_decode($signResponse->getBody(), true));
+
+        //dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
+        //return json_decode($timestampResponse->getBody()->getContents(), true);
     }
 
     /**
