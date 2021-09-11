@@ -95,6 +95,19 @@ class ImageSearchController extends Controller
 
     public function getOnesixImageSearchUrl($image, $site)
     {
+        $timestamp = $this->getTimestampForOnesix($site);
+
+        $sign = $this->getSignForOnesix($timestamp, $site);
+
+        //dd($postHostForSign . http_build_query($formDataForSign));
+        //dd(json_decode($signResponse->getBody(), true));
+
+        //dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
+        //return json_decode($timestampResponse->getBody()->getContents(), true);
+    }
+
+    private function getTimestampForOnesix($site)
+    {
         $postHostForTimestamp = $this->_imgSearchSiteUrls['onesix']['postHost']['timestamp'];
         $serviceIds = $this->_imgSearchSiteUrls['onesix']['serviceIds'];
         $postDataForTimestamp = [
@@ -106,9 +119,15 @@ class ImageSearchController extends Controller
             'outfmt'     => 'json'
         ];
         $timestampResponse = $this->executePost($postDataForTimestamp, $formDataForTimestamp);
-
+        //dd($timestampResponse->getBody()->getContents());
         $timestamp = (string)json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet'];
-        $appKey = base64_encode('pc_tusou' . ';' . $timestamp);
+        return $timestamp;
+    }
+
+    private function getSignForOnesix($timestamp, $site)
+    {
+        $appKeyTemp = utf8_encode('pc_tusou' . ';' . $timestamp);
+        $appKey = base64_encode($appKeyTemp);
         $postHostForSign = $this->_imgSearchSiteUrls['onesix']['postHost']['sign'];
         $postDataForSign = [
             'postHost' => $postHostForSign,
@@ -119,12 +138,10 @@ class ImageSearchController extends Controller
             'appKey'  => $appKey
         ];
         $signResponse = $this->executePost($postDataForSign, $formDataForSign);
-        dd($appKey);
-        dd($postHostForSign . http_build_query($formDataForSign));
-        dd(json_decode($signResponse->getBody(), true));
 
-        //dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
-        //return json_decode($timestampResponse->getBody()->getContents(), true);
+        dd($signResponse->getBody()->getContents());
+
+        return json_decode($signResponse->getBody(), true);
     }
 
     /**
