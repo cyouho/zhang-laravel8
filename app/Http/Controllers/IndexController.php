@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use View;
 use DB;
 
 /**
