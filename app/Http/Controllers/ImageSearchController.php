@@ -58,6 +58,9 @@ class ImageSearchController extends Controller
             case 'baidu':
                 $url = $this->getBaiduImageSearchUrl($image, $site);
                 break;
+            case 'onesix':
+                $url = $this->getOnesixImageSearchUrl($image, $site);
+                break;
             default:
                 return redirect('/');
                 break;
@@ -71,10 +74,10 @@ class ImageSearchController extends Controller
      */
     public function getBaiduImageSearchUrl($image, $site)
     {
-        $baiduImgPostHost = $this->_imgSearchSiteUrls['postHost']['baidu'];
+        $postHost = $this->_imgSearchSiteUrls['baidu']['postHost'];
         $postData = [
             'image'    => $image,
-            'postHost' => $baiduImgPostHost,
+            'postHost' => $postHost,
             'site'     => $site
         ];
         $formData = [
@@ -90,8 +93,55 @@ class ImageSearchController extends Controller
         return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
     }
 
-    public function getOnesixImageSearchUrl()
+    public function getOnesixImageSearchUrl($image, $site)
     {
+        $timestamp = $this->getTimestampForOnesix($site);
+
+        $sign = $this->getSignForOnesix($timestamp, $site);
+
+        //dd($postHostForSign . http_build_query($formDataForSign));
+        //dd(json_decode($signResponse->getBody(), true));
+
+        //dd(json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet']);
+        //return json_decode($timestampResponse->getBody()->getContents(), true);
+    }
+
+    private function getTimestampForOnesix($site)
+    {
+        $postHostForTimestamp = $this->_imgSearchSiteUrls['onesix']['postHost']['timestamp'];
+        $serviceIds = $this->_imgSearchSiteUrls['onesix']['serviceIds'];
+        $postDataForTimestamp = [
+            'postHost' => $postHostForTimestamp,
+            'site'     => $site
+        ];
+        $formDataForTimestamp = [
+            'serviceIds' => $serviceIds,
+            'outfmt'     => 'json'
+        ];
+        $timestampResponse = $this->executePost($postDataForTimestamp, $formDataForTimestamp);
+        //dd($timestampResponse->getBody()->getContents());
+        $timestamp = (string)json_decode($timestampResponse->getBody()->getContents(), true)[$serviceIds]['dataSet'];
+        return $timestamp;
+    }
+
+    private function getSignForOnesix($timestamp, $site)
+    {
+        $appKeyTemp = utf8_encode('pc_tusou' . ';' . $timestamp);
+        $appKey = base64_encode($appKeyTemp);
+        $postHostForSign = $this->_imgSearchSiteUrls['onesix']['postHost']['sign'];
+        $postDataForSign = [
+            'postHost' => $postHostForSign,
+            'site'     => $site
+        ];
+        $formDataForSign = [
+            'appName' => 'pc_tusou',
+            'appKey'  => $appKey
+        ];
+        $signResponse = $this->executePost($postDataForSign, $formDataForSign);
+
+        dd($signResponse->getBody()->getContents());
+
+        return json_decode($signResponse->getBody(), true);
     }
 
     /**

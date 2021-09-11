@@ -1,14 +1,20 @@
 <?php
 return [
     'imageSearch' => [
-        'defaultHost' => [
-            'baiduImgSearchHomePgae'  => 'https://graph.baidu.com/'
+        'baidu' => [
+            'homePageHost' => 'https://graph.baidu.com/',
+            'postHost'     => 'https://graph.baidu.com/upload',
+            'resualtHost'  => 'https://graph.baidu.com/s?sign='
         ],
-        'postHost' => [
-            'baidu' => 'https://graph.baidu.com/upload'
-        ],
-        'resualtHost' => [
-            'baidu' => 'https://graph.baidu.com/s?sign='
+        'onesix' => [
+            'homePageHost' => 'https://www.1688.com/',
+            'postHost'     => [
+                'timestamp' => 'https://open-s.1688.com/openservice/.htm?',
+                'sign'      => 'https://open-s.1688.com/openservice/ossDataService',
+                'img'       => 'https://cbusearch.oss-cn-shanghai.aliyuncs.com/'
+            ],
+            'resualtHost'  => 'https://s.1688.com/youyuan/index.htm?tab=imageSearch&imageType=oss&imageAddress=',
+            'serviceIds'   => 'cbu.searchweb.config.system.currenttime'
         ]
     ]
 ];
