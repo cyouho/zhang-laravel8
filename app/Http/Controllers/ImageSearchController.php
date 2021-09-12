@@ -48,6 +48,9 @@ class ImageSearchController extends Controller
         }
     }
 
+    /**
+     * main image search function entry.
+     */
     public function imageSearch(Request $request)
     {
         $data = $request->post();
@@ -92,6 +95,13 @@ class ImageSearchController extends Controller
         return json_decode($response->getBody()->getContents(), true)['data']['url'] . '&pageFrom=graph_upload_bdbox';
     }
 
+    /**
+     * 1688 image search main function.
+     * it has 3 functions below.
+     * 1. private function getTimestampForOnesix(){}
+     * 2. private function getSignForOnesix(){}
+     * 3. private function getImageUpLoadForOnesix(){}
+     */
     public function getOnesixImageSearchUrl($image, $site)
     {
         $timestamp = $this->getTimestampForOnesix($site);
@@ -105,6 +115,9 @@ class ImageSearchController extends Controller
         //return json_decode($timestampResponse->getBody()->getContents(), true);
     }
 
+    /**
+     * get timestamp for 1688
+     */
     private function getTimestampForOnesix($site)
     {
         $postHostForTimestamp = $this->_imgSearchSiteUrls['onesix']['postHost']['timestamp'];
@@ -123,6 +136,9 @@ class ImageSearchController extends Controller
         return $timestamp;
     }
 
+    /**
+     * get sign for 1688
+     */
     private function getSignForOnesix($timestamp, $site)
     {
         $appKeyTemp = utf8_encode('pc_tusou' . ';' . $timestamp);
@@ -144,7 +160,7 @@ class ImageSearchController extends Controller
     }
 
     /**
-     * 
+     * execute post method.
      */
     private function executePost($postData = [], $formData = [])
     {
