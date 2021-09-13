@@ -7,7 +7,7 @@
         <a class="p-2 text-dark" href="/index2">新主页</a>
         <a class="p-2 text-dark" href="https://github.com/cyouho" target="_blank">我的GitHub</a>
         <a class="p-2 text-dark" href="../en/about_site.html">测试按钮</a>
-        <a class="btn btn-outline-secondary" href="/login">登录</a>
+        <a class="p-2 text-dark" href="/login">登录</a>
     </nav>
     <a class="btn btn-outline-primary" href="/register">注册</a>
 </div>

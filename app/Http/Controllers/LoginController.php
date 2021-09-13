@@ -24,6 +24,6 @@ class LoginController extends Controller
      */
     public function doLogin(Request $request)
     {
-        dd($request->post());
+        dd($request->input('login_email'));
     }
 }
