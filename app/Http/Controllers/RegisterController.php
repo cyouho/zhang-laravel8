@@ -24,6 +24,6 @@ class RegisterController extends Controller
      */
     public function doRegister(Request $request)
     {
-        dd($request->post());
+        dd($request->input('register_email'));
     }
 }
