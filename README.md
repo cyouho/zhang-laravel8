@@ -13,7 +13,7 @@
 - 注1: 现仓库内代码未包含.env环境配置文件，请自行添加并生成APP_KEY，谢谢。
 - 注2: 数据库的链接设置也要自己在,env里配置，谢谢。
 - 注2: 由于安装了第三方包，所以需要自行运行 composer install 来安装第三方包依赖。
-       3.1 要使用 laravel/jetstream 包，需要提前安装 node.js (可能还需要安装 Python 和 VS).
+-- 3.1 要使用 laravel/jetstream 包，需要提前安装 node.js (可能还需要安装 Python 和 VS).
 
 ## About Laravel
 
