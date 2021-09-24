@@ -63,6 +63,9 @@ class ImageSearchController extends Controller
             case 'onesix':
                 $url = $this->getOnesixImageSearchUrl($image, $site);
                 break;
+            case 'alibaba':
+                $url = $this->getAlibabaImageSearch($image, $site);
+                break;
             default:
                 return redirect('/');
                 break;
@@ -157,6 +160,13 @@ class ImageSearchController extends Controller
         dd($signResponse->getBody()->getContents());
 
         return json_decode($signResponse->getBody(), true);
+    }
+
+    /**
+     * get image search for alibaba site
+     */
+    public function getAlibabaImageSearch($image, $site)
+    {
     }
 
     /**
