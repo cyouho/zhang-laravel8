@@ -7,6 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+<p align="center"><a href="https://github.com/cyouho/zhang-laravel8" target="_blank"><img src="public/images/repository/repository01.png" width="400"></a></p>
 ## 关于此仓库
 - 本仓库代码仅供学习交流使用，请勿用于商业用途，谢谢。
 - 注1: 现仓库内代码未包含.env环境配置文件，请自行添加并生成APP_KEY，谢谢。
