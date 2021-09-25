@@ -170,6 +170,15 @@ class ImageSearchController extends Controller
     }
 
     /**
+     * get image contents from URL.
+     */
+    private function getFileContents($image)
+    {
+        $file = file_get_contents($image);
+        return $file;
+    }
+
+    /**
      * execute post method.
      */
     private function executePost($postData = [], $formData = [])
