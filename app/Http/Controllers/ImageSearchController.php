@@ -14,7 +14,7 @@ class ImageSearchController extends Controller
     /**
      * Define all the sites of image search function.
      */
-    private $_defaultSiteUrls = [];
+    private $_imgSearchSiteUrls = [];
 
     /**
      * Get contents of config file.
