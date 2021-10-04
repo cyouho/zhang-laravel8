@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ImageSearchController;
+//use App\Http\Controllers\ImageSearchController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ImageSearch\ImageSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::get('/index2', [
 ]);
 
 /**
- * 百度, 1688, Alibaba国际, 淘宝的以图搜图路由
+ * 百度, 1688, Alibaba国际, 淘宝的以图搜图路由，暂时不使用！
  */
 Route::get('imgsearch/{site?}', [
     ImageSearchController::class, 'showSiteImageSearchHomePage'
@@ -64,6 +65,7 @@ Route::get('test', [
     ImageSearchController::class, 'getBaiduImageSearchUrl'
 ]);
 
+// 现在使用中的搜图路由。
 Route::post('imageSearch', [
     ImageSearchController::class, 'imageSearch'
 ]);
