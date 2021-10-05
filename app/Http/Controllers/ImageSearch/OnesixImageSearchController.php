@@ -12,6 +12,9 @@ class OnesixImageSearchController extends Controller
     {
         $timestamp = self::getTimestampForOnesix($site, $host);
         $sign = self::getSignForOnesix($timestamp, $site, $host);
+        $url = self::uploadImageForOnesix($image, $site, $sign, $host);
+        
+        return $url;
     }
 
     private static function getTimestampForOnesix($site, $host)
@@ -47,8 +50,37 @@ class OnesixImageSearchController extends Controller
         ];
         $signResponse = Util::executePost($postDataForSign, $formDataForSign);
 
-        dd($signResponse->getBody()->getContents());
+        //dd($signResponse->getBody()->getContents());
 
         return json_decode($signResponse->getBody(), true);
+    }
+
+    private static function uploadImageForOnesix($image, $site, $sign, $host)
+    {
+        $postTimestamp = (string)time() * 1000;
+        $key = 'cbuimgsearch' . Util::getRandomString($len = 10) .
+            (string)$postTimestamp . '.jpg';
+        $name = Util::getRandomString($len = 5) . '.jpg';
+        $file = Util::getFileContents($image);
+
+        $postDateForUrl = [
+            'postHost' => $host['onesix']['postHost']['img'],
+        ];
+
+        $formDateForUrl = [
+            'name'                  => $name,
+            'key'                   => $key,
+            'policy'                => $sign['policy'],
+            'OSSAccessKeyId'        => $sign['accessid'],
+            'success_action_status' => 200,
+            'callback'              => '',
+            'signature'             => $sign['signature'],
+            'file'                  => $file,
+        ];
+
+        Util::executePost($postDateForUrl, $formDateForUrl);
+
+        $url = $host['onesix']['resualtHost'] . $key;
+        return $url;
     }
 }
