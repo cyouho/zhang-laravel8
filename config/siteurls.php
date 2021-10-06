@@ -15,6 +15,16 @@ return [
             ],
             'resualtHost'  => 'https://s.1688.com/youyuan/index.htm?tab=imageSearch&imageType=oss&imageAddress=',
             'serviceIds'   => 'cbu.searchweb.config.system.currenttime'
+        ],
+        'alibaba' => [
+            'homePageHost' => '',
+            'postHost'     => '',
+            'resultHost'   => ''
+        ],
+        'taobao' => [
+            'homePageHost' => '',
+            'postHost'     => '',
+            'resultHost'   => ''
         ]
     ]
 ];
