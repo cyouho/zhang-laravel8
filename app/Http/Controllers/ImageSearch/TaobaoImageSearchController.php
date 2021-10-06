@@ -10,5 +10,12 @@ class TaobaoImageSearchController extends Controller
 {
     public static function getTaobaoImageSearchUrl($image, $site, $host)
     {
+        $result = Util::uploadTempTmage($image, $site, $host);
+
+        $imageName = $result['name'];
+
+        $url = $host['taobao']['resultHost'] . $imageName . '&app=imgsearch';
+
+        return $url;
     }
 }

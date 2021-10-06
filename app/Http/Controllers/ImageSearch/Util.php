@@ -35,4 +35,45 @@ class Util extends Controller
 
         return $str;
     }
+
+    public static function uploadTempTmage($image, $site, $host)
+    {
+        $file = self::getFileContents($image);
+
+        $temp = tmpfile();
+        fwrite($temp, $file);
+
+        if (file_exists(stream_get_meta_data($temp)['uri']) && file_get_contents(stream_get_meta_data($temp)['uri'])) {
+            $path = stream_get_meta_data($temp)['uri'];
+        } else {
+            return false;
+        }
+
+        switch ($site) {
+            case 'taobao':
+                $formData = [
+                    'imgfile' => curl_file_create($path, 'image/jpeg'),
+                ];
+                $postData = [
+                    'postHost' => $host['taobao']['postHost']
+                ];
+                $result = self::executePost($formData, $postData);
+            case 'alibaba':
+                $imageName = self::getRandomString($len = 5);
+                $formData = [
+                    'file'  => curl_file_create($path, 'image/jpeg'),
+                    'scene' => 'scImageSearchNsRule',
+                    'name'  => (string)$imageName . '.jpg'
+                ];
+                $postData = [
+                    'postHost' => $host['alibaba']['postHost']
+                ];
+                $result = self::executePost($formData, $postData);
+                break;
+            default:
+                $result = false;
+        }
+        fclose($temp);
+        return $result;
+    }
 }
