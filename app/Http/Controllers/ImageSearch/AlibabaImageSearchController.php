@@ -10,5 +10,12 @@ class AlibabaImageSearchController extends Controller
 {
     public static function getAlibabaImageSearch($image, $site, $host)
     {
+        $result = Util::uploadTempTmage($image, $site, $host);
+
+        $imageUrl = $result['fs_url'];
+
+        $url = $host['alibaba']['resultHost'] . $imageUrl . '&sourceFrom=imageupload';
+
+        return $url;
     }
 }
