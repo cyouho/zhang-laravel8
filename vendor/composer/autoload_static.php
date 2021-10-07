@@ -47,6 +47,10 @@ class ComposerStaticInitd645d7f4d5b2fe033342870a1451f8f6
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'k' => 
+        array (
+            'kartik\\plugins\\fileinput\\' => 25,
+        ),
         'W' => 
         array (
             'Whoops\\' => 7,
@@ -187,6 +191,10 @@ class ComposerStaticInitd645d7f4d5b2fe033342870a1451f8f6
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'kartik\\plugins\\fileinput\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/bootstrap-fileinput',
         ),
         'Whoops\\' => 
         array (
@@ -515,6 +523,12 @@ class ComposerStaticInitd645d7f4d5b2fe033342870a1451f8f6
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\AlibabaImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/AlibabaImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\BaiduImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/BaiduImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\ImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/ImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\OnesixImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/OnesixImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\TaobaoImageSearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/TaobaoImageSearchController.php',
+        'App\\Http\\Controllers\\ImageSearch\\Util' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageSearch/Util.php',
         'App\\Http\\Controllers\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndexController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
         'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
@@ -529,6 +543,7 @@ class ComposerStaticInitd645d7f4d5b2fe033342870a1451f8f6
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\User\\User' => __DIR__ . '/../..' . '/app/Models/User/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
