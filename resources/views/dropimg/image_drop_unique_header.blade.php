@@ -1,0 +1,1 @@
+<script src="/js/dropimg/dropimg.js"></script>
