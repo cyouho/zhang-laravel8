@@ -1,6 +1,11 @@
 $(document).ready(function () {
     var site = "";
     var imageUrl = "";
+    var siteName = new Array;
+    siteName['baidu'] = '百度';
+    siteName['onesix'] = '1688';
+    siteName['alibaba'] = 'Alibaba';
+    siteName['taobao'] = '淘宝';
 
     $("#baidu").click(function () {
         site = $("#baidu").attr("value");
@@ -44,7 +49,8 @@ $(document).ready(function () {
 
     function ajaxPost(site, imageUrl) {
         newwindow = window.open("about:blank");
-        newwindow.document.write("<p>图片解析中... ...</p>");
+        pageDocument = '<p>' + siteName[site] + '图片解析中... ...</p>';
+        newwindow.document.write(pageDocument);
         window.focus();
         $.ajax({
             url: "/imageSearch",

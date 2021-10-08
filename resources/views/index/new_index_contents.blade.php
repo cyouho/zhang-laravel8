@@ -18,7 +18,7 @@
                         <a id="taobao" class="dropdown-item" href="#" value="taobao">淘宝</a>
                     </div>
                 </div>
-                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址" value="">
+                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址 (在线图片可以拖拽)" value="">
             </div>
         </form>
     </div>
