@@ -22,4 +22,9 @@ class IndexController extends Controller
     {
         return view('index.new_index');
     }
+
+    public function imageSearchByDrop()
+    {
+        return view('dropimg.image_drop_page');
+    }
 }

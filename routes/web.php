@@ -6,6 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ImageSearch\ImageSearchController;
+use League\CommonMark\Block\Element\IndentedCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::get('/index', [
 ]);
 
 Route::get('/index2', [
-    IndexController::class, 'index2'
+    IndexController::class, 'imageSearchByDrop'
 ]);
 
 /**
