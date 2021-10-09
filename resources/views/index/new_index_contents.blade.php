@@ -18,7 +18,8 @@
                         <a id="taobao" class="dropdown-item" href="#" value="taobao">淘宝</a>
                     </div>
                 </div>
-                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址 (在线图片可以拖拽)" value="">
+                <span class="soutu-btn" data-toggle="modal" data-target="#myModal" data-toggle2="tooltip" data-placement="bottom" title="点击上传图片"></span>
+                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址" value="">
             </div>
         </form>
     </div>

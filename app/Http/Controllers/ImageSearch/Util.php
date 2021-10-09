@@ -57,7 +57,7 @@ class Util extends Controller
                 $postData = [
                     'postHost' => $host['taobao']['postHost']
                 ];
-                $result = self::executePost($formData, $postData);
+                $result = self::executePost($postData, $formData);
             case 'alibaba':
                 $imageName = self::getRandomString($len = 5);
                 $formData = [
@@ -68,7 +68,7 @@ class Util extends Controller
                 $postData = [
                     'postHost' => $host['alibaba']['postHost']
                 ];
-                $result = self::executePost($formData, $postData);
+                $result = self::executePost($postData, $formData);
                 break;
             default:
                 $result = false;

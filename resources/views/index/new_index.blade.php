@@ -8,6 +8,7 @@
 <body>
     @include('global_navbar_unlogin')
     @include('index.new_index_contents')
+    @include('index.popup_layer')
     @include('global_footer')
 </body>
 
