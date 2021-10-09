@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <span class="soutu-btn" data-toggle="modal" data-target="#myModal" data-toggle2="tooltip" data-placement="bottom" title="点击上传图片"></span>
-                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址" value="" data-toggle="tooltip" title="在线图片可以拖拽">
+                <input id="imageUrl" type="text" class="form-control" placeholder="图片地址" value="">
             </div>
         </form>
     </div>
