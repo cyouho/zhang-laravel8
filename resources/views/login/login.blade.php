@@ -21,6 +21,10 @@
                 <a class="navbar-brand text-dark" href="/">
                     CYOUHO</a>
             </h1>
+            <h5 class="my-0 mr-md-auto font-weight-normal">
+                <p class="navbar-brand text-dark">
+                    登录已有账户</p>
+            </h5>
         </div>
 
         <div class="form-label-group">
