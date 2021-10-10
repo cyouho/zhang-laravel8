@@ -51,7 +51,7 @@
     input框里的小图标css
     */
     .soutu-btn {
-      z-index:1;
+      z-index:10;
       position:absolute;
       right:11px;
       top:50%;
