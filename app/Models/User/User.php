@@ -12,4 +12,12 @@ class User extends Model
     public function insert()
     {
     }
+
+    public function get()
+    {
+    }
+
+    public function set()
+    {
+    }
 }
