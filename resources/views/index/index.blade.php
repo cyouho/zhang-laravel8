@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    @include('global_navbar_unlogin')
+    @include('global_navbar_layout')
     @include('index.index_contents')
     @include('global_footer')
 </body>

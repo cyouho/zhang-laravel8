@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    @include('global_navbar_unlogin')
+    @include('global_navbar_layout')
     @include('dropimg.image_drop_search')
     @include('global_footer')
 </body>

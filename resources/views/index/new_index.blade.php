@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    @include('global_navbar_unlogin')
+    @include('global_navbar_layout')
     @include('index.new_index_contents')
     @include('index.popup_layer')
     @include('global_footer')

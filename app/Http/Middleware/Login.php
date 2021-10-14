@@ -17,6 +17,7 @@ class Login
      */
     public function handle(Request $request, Closure $next)
     {
+        request()->cookie('_cyouho') ? view()->share('isLogin', true) : view()->share('isLogin', false);
 
         return $next($request);
     }
