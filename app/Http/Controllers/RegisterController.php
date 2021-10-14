@@ -24,6 +24,7 @@ class RegisterController extends Controller
      */
     public function doRegister(Request $request)
     {
-        dd($request->input('register_email'));
+        //dd($request->input('register_email'));
+        return response()->redirectTo('/')->cookie('_cyouho', 'osdijgfoij', 60);
     }
 }

@@ -62,6 +62,11 @@ Route::post('doregister', [
     RegisterController::class, 'doRegister'
 ]);
 
+//退出登录按钮
+Route::get('logout', [
+    LoginController::class, 'doLogout'
+]);
+
 Route::get('test', [
     ImageSearchController::class, 'getBaiduImageSearchUrl'
 ]);
