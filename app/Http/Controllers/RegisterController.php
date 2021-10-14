@@ -24,7 +24,15 @@ class RegisterController extends Controller
      */
     public function doRegister(Request $request)
     {
+        $test = new User();
+        $email = $request->input('register_email');
+        $password = $request->input('register_pwd');
+        $userId = $test->get($email);
+
+        if (!$userId) {
+            $cookie = $test->RegisterSet($email, $password);
+        }
         //dd($request->input('register_email'));
-        return response()->redirectTo('/')->cookie('_cyouho', 'osdijgfoij', 60);
+        return response()->redirectTo('/')->cookie('_cyouho', $cookie, 60);
     }
 }
