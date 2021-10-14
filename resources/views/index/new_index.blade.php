@@ -6,11 +6,7 @@
 </head>
 
 <body>
-    @if ($isLogin)
-    @include('global_navbar_login')
-    @else
-    @include('global_navbar_unlogin')
-    @endif
+    @include('global_navbar_layout')
     @include('index.new_index_contents')
     @include('index.popup_layer')
     @include('global_footer')
