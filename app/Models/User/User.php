@@ -16,10 +16,25 @@ class User extends Model
     {
     }
 
-    public function get($email)
+    public function getUserId($email)
     {
         $userId = DB::select('select user_id from users where email = ?', [$email]);
         return $userId;
+    }
+
+
+    public function getSeesion($email)
+    {
+        $data = DB::select('select user_session from users where email = ?', [$email]);
+        $session = $data[0]->user_session;
+        return $session;
+    }
+
+    public function checkUserPwd($password, $email)
+    {
+        $data = DB::select('select password from users where email = ?', [$email]);
+        $hashPwd = $data[0]->password;
+        return Hash::check($password, (string)$hashPwd);
     }
 
     public function RegisterSet($email, $password)

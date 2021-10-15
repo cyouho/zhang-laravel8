@@ -29,6 +29,9 @@
         <div class="form-label-group">
             <input type="email" id="inputEmail" name="register_email" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputEmail">电子邮箱地址</label>
+            @isset($errMSG)
+            <p class="error-message">{{$errMSG}}</p>
+            @endisset
         </div>
 
         <div class="form-label-group">
