@@ -37,6 +37,11 @@ class User extends Model
         return Hash::check($password, (string)$hashPwd);
     }
 
+    public function updateLastLoginTime($email)
+    {
+        $affected = DB::update('update users set last_login_at = ? where email = ?', [time(), $email]);
+    }
+
     public function RegisterSet($email, $password)
     {
         $userName = Utils::getUserName($email);
