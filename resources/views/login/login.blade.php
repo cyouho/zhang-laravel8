@@ -30,11 +30,17 @@
         <div class="form-label-group">
             <input type="email" id="inputEmail" name="login_email" class="form-control" placeholder="Email address" required autofocus>
             <label for="inputEmail">电子邮箱地址</label>
+            @isset($errMSG['id'])
+            <p class="error-message">{{$errMSG['id']}}</p>
+            @endisset
         </div>
 
         <div class="form-label-group">
             <input type="password" id="inputPassword" name="login_pwd" class="form-control" placeholder="Password" required>
             <label for="inputPassword">登录密码</label>
+            @isset($errMSG['pwd'])
+            <p class="error-message">{{$errMSG['pwd']}}</p>
+            @endisset
         </div>
 
         <div class="checkbox mb-3">
