@@ -42,6 +42,14 @@ class User extends Model
         $affected = DB::update('update users set last_login_at = ? where email = ?', [time(), $email]);
     }
 
+    public function getUserName($session)
+    {
+        $data = DB::select('select user_name from users where user_session = ?', [$session]);
+        $userName = array_map('get_object_vars', $data);
+
+        return $userName[0]['user_name'];
+    }
+
     public function RegisterSet($email, $password)
     {
         $userName = Utils::getUserName($email);

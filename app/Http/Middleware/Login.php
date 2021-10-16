@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\User\User;
 
 class Login
 {
@@ -18,7 +18,21 @@ class Login
      */
     public function handle(Request $request, Closure $next)
     {
-        request()->cookie('_cyouho') ? view()->share('isLogin', true) : view()->share('isLogin', false);
+        $cookie = request()->cookie('_cyouho');
+
+        //$cookie ? view()->share('isLogin', true) : view()->share('isLogin', false);
+
+        if ($cookie) {
+            $user = new User();
+            $userName = $user->getUserName($cookie);
+            $data = [
+                'isLogin'  => true,
+                'userName' => $userName,
+            ];
+            view()->share('data', $data);
+        } else {
+            view()->share('data', ['isLogin' => false]);
+        }
 
         return $next($request);
     }

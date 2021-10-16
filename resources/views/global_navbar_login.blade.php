@@ -7,7 +7,15 @@
         <a class="p-2 text-dark" href="/index2">新主页</a>
         <a class="p-2 text-dark" href="https://github.com/cyouho" target="_blank">我的GitHub</a>
         <a class="p-2 text-dark" href="../en/about_site.html">测试按钮</a>
-        <a class="p-2 text-dark" href="/logout">退出登录</a>
     </nav>
-    <a class="p-2 text-dark" href="/register">用户</a>
+
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            {{$data['userName']}}
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/myPage" target="_blank">个人主页</a>
+            <a class="dropdown-item" href="/logout">退出</a>
+        </div>
+    </div>
 </div>
