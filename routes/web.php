@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ImageSearch\ImageSearchController;
 use League\CommonMark\Block\Element\IndentedCode;
+use App\Http\Controllers\myPage\myHomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,4 +75,8 @@ Route::get('test', [
 // 现在使用中的搜图路由。
 Route::post('imageSearch', [
     ImageSearchController::class, 'imageSearch'
+]);
+
+Route::get('myPage', [
+    myHomePageController::class, 'index'
 ]);
