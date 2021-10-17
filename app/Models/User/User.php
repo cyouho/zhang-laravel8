@@ -13,17 +13,18 @@ class User extends Model
 {
     use HasFactory;
 
-    public function insert()
-    {
-    }
-
+    /**
+     * 
+     */
     public function getUserId($email)
     {
         $userId = DB::select('select user_id from users where email = ?', [$email]);
         return $userId;
     }
 
-
+    /**
+     * 
+     */
     public function getSeesion($email)
     {
         $data = DB::select('select user_session from users where email = ?', [$email]);
@@ -31,6 +32,9 @@ class User extends Model
         return $session;
     }
 
+    /**
+     * 
+     */
     public function checkUserPwd($password, $email)
     {
         $data = DB::select('select password from users where email = ?', [$email]);
@@ -38,16 +42,25 @@ class User extends Model
         return Hash::check($password, (string)$hashPwd);
     }
 
+    /**
+     * 
+     */
     public function updateLastLoginTime($email)
     {
         $affected = DB::update('update users set last_login_at = ? where email = ?', [time(), $email]);
     }
 
+    /**
+     * 
+     */
     public function updateTotalLoginTimes($email)
     {
         $affected = DB::update('update users set total_login_times = total_login_times + 1 where email = ?', [$email]);
     }
 
+    /**
+     * 
+     */
     public function getUserName($session)
     {
         $data = DB::select('select user_name from users where user_session = ?', [$session]);
@@ -56,18 +69,36 @@ class User extends Model
         return $userName[0]['user_name'];
     }
 
+    /**
+     * 
+     */
     public function getLastLoginTime($session)
     {
         $data = DB::select('select last_login_at from users where user_session = ?', [$session]);
         return ControllersUtils::getArrFromObj($data);
     }
 
+    /**
+     * 
+     */
     public function getTotalLoginTimes($session)
     {
         $data = DB::select('select total_login_times from users where user_session = ?', [$session]);
         return ControllersUtils::getArrFromObj($data);
     }
 
+    /**
+     * 
+     */
+    public function getRegisterTime($session)
+    {
+        $data = DB::select('select create_at from users where user_session = ?', [$session]);
+        return ControllersUtils::getArrFromObj($data);
+    }
+
+    /**
+     * 
+     */
     public function RegisterSet($email, $password)
     {
         $userName = Utils::getUserName($email);
