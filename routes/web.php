@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ImageSearch\ImageSearchController;
 use League\CommonMark\Block\Element\IndentedCode;
 use App\Http\Controllers\myPage\myHomePageController;
+use App\Http\Controllers\myPage\profileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,13 @@ Route::post('imageSearch', [
     ImageSearchController::class, 'imageSearch'
 ]);
 
-Route::get('myPage', [
-    myHomePageController::class, 'index'
-]);
+// my page route group.
+Route::middleware(['myPage'])->group(function () {
+    Route::get('myPage', [
+        myHomePageController::class, 'index'
+    ]);
+
+    Route::get('profile', [
+        profileController::class, 'index'
+    ]);
+});
