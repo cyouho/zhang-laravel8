@@ -71,4 +71,5 @@ $(document).ready(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle2="tooltip"]').tooltip();
+    $('[data-toggle3="tooltip"]').tooltip();
 });

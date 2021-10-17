@@ -15,6 +15,8 @@
         </button>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="/myPage" target="_blank">个人主页</a>
+            <a class="dropdown-item" href="#" target="_blank">设置</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">退出</a>
         </div>
     </div>
