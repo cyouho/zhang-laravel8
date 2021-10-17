@@ -50,6 +50,7 @@ class LoginController extends Controller
         }
 
         $user->updateLastLoginTime($email);
+        $user->updateTotalLoginTimes($email);
         $cookie = $user->getSeesion($email);
         return response()->redirectTo('/')->cookie('_cyouho', $cookie, 60);
     }

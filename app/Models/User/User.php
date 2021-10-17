@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Http\Controllers\Utils as ControllersUtils;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -42,12 +43,29 @@ class User extends Model
         $affected = DB::update('update users set last_login_at = ? where email = ?', [time(), $email]);
     }
 
+    public function updateTotalLoginTimes($email)
+    {
+        $affected = DB::update('update users set total_login_times = total_login_times + 1 where email = ?', [$email]);
+    }
+
     public function getUserName($session)
     {
         $data = DB::select('select user_name from users where user_session = ?', [$session]);
         $userName = array_map('get_object_vars', $data);
 
         return $userName[0]['user_name'];
+    }
+
+    public function getLastLoginTime($session)
+    {
+        $data = DB::select('select last_login_at from users where user_session = ?', [$session]);
+        return ControllersUtils::getArrFromObj($data);
+    }
+
+    public function getTotalLoginTimes($session)
+    {
+        $data = DB::select('select total_login_times from users where user_session = ?', [$session]);
+        return ControllersUtils::getArrFromObj($data);
     }
 
     public function RegisterSet($email, $password)
@@ -57,15 +75,16 @@ class User extends Model
         $password = Hash::make($password);
         $timestamp = time();
         $data = [
-            'user_name'     => $userName,
-            'email'         => $email,
-            'password'      => $password,
-            'user_session'  => $session,
-            'create_at'     => $timestamp,
-            'update_at'     => $timestamp,
-            'last_login_at' => $timestamp
+            'user_name'         => $userName,
+            'email'             => $email,
+            'password'          => $password,
+            'user_session'      => $session,
+            'create_at'         => $timestamp,
+            'update_at'         => $timestamp,
+            'last_login_at'     => $timestamp,
+            'total_login_times' => 1,
         ];
-        DB::insert('insert into users (user_name, email, password, user_session, create_at, update_at, last_login_at) values (?, ?, ?, ?, ?, ?, ?)', [$data['user_name'], $data['email'], $data['password'], $data['user_session'], $data['create_at'], $data['update_at'], $data['last_login_at']]);
+        DB::insert('insert into users (user_name, email, password, user_session, create_at, update_at, last_login_at, total_login_times) values (?, ?, ?, ?, ?, ?, ?, ?)', [$data['user_name'], $data['email'], $data['password'], $data['user_session'], $data['create_at'], $data['update_at'], $data['last_login_at'], $data['total_login_times']]);
 
         return $session;
     }
