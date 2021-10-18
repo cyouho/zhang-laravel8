@@ -35,11 +35,22 @@ class User extends Model
     /**
      * 
      */
-    public function checkUserPwd($password, $email)
+    public function checkUserPwd($password, $data)
     {
-        $data = DB::select('select password from users where email = ?', [$email]);
+        $key = key($data);
+        $data = DB::select('select password from users where ' . $key . ' = ?', [$data[$key]]);
         $hashPwd = $data[0]->password;
         return Hash::check($password, (string)$hashPwd);
+    }
+
+    /**
+     * 
+     */
+    public function updateUserPwd($password, $data)
+    {
+        $key = key($data);
+        $affected = DB::update('update users set password = ? where ' . $key . ' = ?', [Hash::make($password), $data[$key]]);
+        return $affected;
     }
 
     /**
