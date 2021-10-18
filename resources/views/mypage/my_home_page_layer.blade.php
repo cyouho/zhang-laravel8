@@ -2,7 +2,7 @@
 
 <head>
     @include('global_header')
-    @include('index.index_unique_header')
+    @include('mypage.my_home_page_unique_header')
 </head>
 
 <body>

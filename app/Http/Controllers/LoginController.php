@@ -38,12 +38,15 @@ class LoginController extends Controller
         $email = $request->input('login_email');
         $password = $request->input('login_pwd');
         $userId = $user->getUserId($email);
+        $data = [
+            'email' => $email,
+        ];
 
         if (!$userId) {
             return view('login.login', ['errMSG' => [
                 'id' => $this->_message['error_message']['login']['not_exist_user_id'],
             ]]);
-        } else if (!$user->checkUserPwd($password, $email)) {
+        } else if (!$user->checkUserPwd($password, $data)) {
             return view('login.login', ['errMSG' => [
                 'pwd' => $this->_message['error_message']['login']['password_error']
             ]]);
