@@ -1,4 +1,5 @@
 <section class="jumbotron text-center">
+    <div id="msg"></div>
     <div class="container">
         <h1>设置</h1>
         <p class="lead text-muted">set up.</p>
