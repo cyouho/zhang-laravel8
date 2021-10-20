@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Utils
 {
-    public static function getUserName($email)
+    public static function getNameFromEmail($email)
     {
         return substr($email, 0, strripos($email, "@"));
     }
