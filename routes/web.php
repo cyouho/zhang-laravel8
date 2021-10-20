@@ -87,8 +87,8 @@ Route::middleware(['myPage'])->group(function () {
     Route::get('profile', [
         profileController::class, 'index'
     ]);
-});
 
-Route::post('/resetPassword', [
-    profileController::class, 'resetPassword'
-]);
+    Route::post('/resetPassword', [
+        profileController::class, 'resetPassword'
+    ]);
+});
