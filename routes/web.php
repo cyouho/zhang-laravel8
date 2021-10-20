@@ -9,6 +9,7 @@ use App\Http\Controllers\ImageSearch\ImageSearchController;
 use League\CommonMark\Block\Element\IndentedCode;
 use App\Http\Controllers\myPage\myHomePageController;
 use App\Http\Controllers\myPage\profileController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,11 @@ Route::middleware(['myPage'])->group(function () {
         profileController::class, 'resetPassword'
     ]);
 });
+
+Route::get('/admin', [
+    AdminController::class, 'index'
+]);
+
+Route::post('/adminDoLogin', [
+    AdminController::class, 'doLogin'
+]);

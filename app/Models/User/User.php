@@ -112,7 +112,7 @@ class User extends Model
      */
     public function RegisterSet($email, $password)
     {
-        $userName = Utils::getUserName($email);
+        $userName = Utils::getNameFromEmail($email);
         $session = Utils::getSessionRandomMD5();
         $password = Hash::make($password);
         $timestamp = time();
