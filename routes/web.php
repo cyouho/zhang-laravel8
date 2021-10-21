@@ -10,6 +10,7 @@ use League\CommonMark\Block\Element\IndentedCode;
 use App\Http\Controllers\myPage\myHomePageController;
 use App\Http\Controllers\myPage\profileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Middleware\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,4 +101,8 @@ Route::get('/admin', [
 
 Route::post('/adminDoLogin', [
     AdminController::class, 'doLogin'
+]);
+
+Route::get('/adminIndex', [
+    AdminController::class, 'adminIndex'
 ]);

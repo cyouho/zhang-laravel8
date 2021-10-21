@@ -5,6 +5,7 @@
 </head>
 
 <body>
+    @include('admin.admin_navbar')
     @include('global_footer')
 </body>
 

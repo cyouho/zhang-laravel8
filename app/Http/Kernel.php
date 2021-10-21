@@ -49,6 +49,10 @@ class Kernel extends HttpKernel
         'myPage' => [
             \App\Http\Middleware\myPage::class,
         ],
+
+        'admin' => [
+            \App\Http\Middleware\Admin::class,
+        ],
     ];
 
     /**

@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <form class="form-signin" action="/adminDologin" method="POST">
+    <form class="form-signin" action="/adminDoLogin" method="POST">
         @csrf
         <div class="text-center mb-4">
             <h1 class="my-0 mr-md-auto font-weight-normal">
-                <a class="navbar-brand text-dark" href="/">
+                <a class="navbar-brand text-dark">
                     CYOUHO</a>
             </h1>
             <h5 class="my-0 mr-md-auto font-weight-normal">
@@ -43,11 +43,6 @@
             @endisset
         </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> 记住我
-            </label>
-        </div>
         <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
         <p class="mt-5 mb-3 text-muted text-center">This site was created by CYOUHO with &copy; Bootstrap 4!</p>
     </form>
