@@ -39,9 +39,11 @@ class Login
         if ($adminCookie) {
             $admin = new Admin();
             $adminName = $admin->getAdminName($adminCookie);
+            $adminRole = $admin->getAdminRole(['admin_session' => $adminCookie]);
             $adminData = [
                 'isLogin'   => true,
                 'adminName' => $adminName,
+                'adminRole' => $adminRole,
             ];
             view()->share('adminData', $adminData);
         }

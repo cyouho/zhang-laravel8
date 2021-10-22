@@ -95,12 +95,17 @@ Route::middleware(['myPage'])->group(function () {
     ]);
 });
 
+// admin route and route group.
 Route::get('/admin', [
     AdminController::class, 'index'
 ]);
 
 Route::post('/adminDoLogin', [
     AdminController::class, 'doLogin'
+]);
+
+Route::get('adminLogout', [
+    AdminController::class, 'doLogout'
 ]);
 
 Route::middleware(['admin'])->group(function () {

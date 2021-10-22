@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,13 @@ use Illuminate\Support\Facades\Hash;
 class Admin extends Model
 {
     use HasFactory;
+
+    private $_role;
+
+    public function __construct()
+    {
+        $this->_role = config('admin.role');
+    }
 
     /**
      * 
@@ -32,10 +40,13 @@ class Admin extends Model
     /**
      * 
      */
-    public function getAdminRole($email)
+    public function getAdminRole($data)
     {
-        $adminRole = DB::select('select role from admins where admin_email = ?', [$email]);
-        return $adminRole;
+        $key = key($data);
+        $result = DB::select('select role from admins where ' . $key . ' = ?', [$data[$key]]);
+        $adminRole = array_map('get_object_vars', $result);
+
+        return $this->_role[$adminRole[0]['role']];
     }
 
     public function getSeesion($email)

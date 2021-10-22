@@ -14,14 +14,15 @@
         <!-- Dropdown -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                @if (isset($adminData['adminName']))
-                {{$adminData['adminName']}}
+                @if (isset($adminData['adminName']) && isset($adminData['adminRole']))
+                {{$adminData['adminRole']}}{{$adminData['adminName']}}
                 @endif
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Link 1</a>
                 <a class="dropdown-item" href="#">Link 2</a>
-                <a class="dropdown-item" href="#">Link 3</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/adminLogout">退出</a>
             </div>
         </li>
     </ul>
