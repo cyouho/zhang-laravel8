@@ -103,6 +103,8 @@ Route::post('/adminDoLogin', [
     AdminController::class, 'doLogin'
 ]);
 
-Route::get('/adminIndex', [
-    AdminController::class, 'adminIndex'
-]);
+Route::middleware(['admin'])->group(function () {
+    Route::get('/adminIndex', [
+        AdminController::class, 'adminIndex'
+    ]);
+});

@@ -2,6 +2,7 @@
 
 <head>
     @include('global_header')
+    @include('admin.admin_unique_header')
 </head>
 
 <body>
