@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Admin;
+use Illuminate\Support\Facades\Cookie;
 
 class AdminController extends Controller
 {
@@ -53,6 +54,12 @@ class AdminController extends Controller
         $admin->updateTotalLoginTimes($email);
         $cookie = $admin->getSeesion($email);
         return response()->redirectTo('/adminIndex')->cookie('_zhangfan', $cookie, 60);
+    }
+
+    public function doLogout()
+    {
+        $cookie = Cookie::forget('_zhangfan');
+        return response()->redirectTo('/admin')->cookie($cookie);
     }
 
     public function doRegister(Request $request)
