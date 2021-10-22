@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\User\User;
+use App\Models\Admin\Admin;
 
 class Login
 {
@@ -19,6 +20,7 @@ class Login
     public function handle(Request $request, Closure $next)
     {
         $cookie = request()->cookie('_cyouho');
+        $adminCookie = request()->cookie('_zhangfan');
 
         //$cookie ? view()->share('isLogin', true) : view()->share('isLogin', false);
 
@@ -32,6 +34,16 @@ class Login
             view()->share('data', $data);
         } else {
             view()->share('data', ['isLogin' => false]);
+        }
+
+        if ($adminCookie) {
+            $admin = new Admin();
+            $adminName = $admin->getAdminName($adminCookie);
+            $adminData = [
+                'isLogin'   => true,
+                'adminName' => $adminName,
+            ];
+            view()->share('adminData', $adminData);
         }
 
         return $next($request);

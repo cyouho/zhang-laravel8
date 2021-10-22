@@ -18,7 +18,7 @@ class Admin
     {
         $cookie = request()->cookie('_zhangfan');
         if (is_null($cookie)) {
-            redirect('/login')->send();
+            redirect('/admin')->send();
         }
         return $next($request);
     }

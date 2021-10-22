@@ -21,6 +21,14 @@ class Admin extends Model
         return $adminId;
     }
 
+    public function getAdminName($cookie)
+    {
+        $data = DB::select('select admin_name from admins where admin_session = ?', [$cookie]);
+        $adminName = array_map('get_object_vars', $data);
+
+        return $adminName[0]['admin_name'];
+    }
+
     /**
      * 
      */
