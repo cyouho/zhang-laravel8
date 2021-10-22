@@ -13,16 +13,16 @@
     <script src="/js/index/index.js"></script>
 </head>
 
-<body>
+<body class="bg-dark text-white">
     <form class="form-signin" action="/adminDoLogin" method="POST">
         @csrf
         <div class="text-center mb-4">
             <h1 class="my-0 mr-md-auto font-weight-normal">
-                <a class="navbar-brand text-dark">
+                <a class="navbar-brand text-muted">
                     CYOUHO</a>
             </h1>
             <h5 class="my-0 mr-md-auto font-weight-normal">
-                <p class="navbar-brand text-dark">
+                <p class="navbar-brand text-muted">
                     登录管理员账户</p>
             </h5>
         </div>

@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom shadow-sm container">
     <!-- Brand -->
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="#">CYOUHO</a>
 
     <!-- Links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav ml-auto">
         <li class="nav-item">
             <a class="nav-link" href="#">Link 1</a>
         </li>
