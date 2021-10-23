@@ -112,4 +112,16 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/adminIndex', [
         AdminController::class, 'adminIndex'
     ]);
+
+    Route::get('/createAdminIndex', [
+        AdminController::class, 'createAdminIndex'
+    ]);
+
+    Route::post('/createAdmin', [
+        AdminController::class, 'doRegister'
+    ]);
+
+    Route::get('/showAdminInfo', [
+        AdminController::class, 'showAdminInfo'
+    ]);
 });
