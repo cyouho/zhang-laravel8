@@ -30,6 +30,16 @@ class AdminController extends Controller
         return view('admin.index.admin_index_layer');
     }
 
+    public function createAdminIndex()
+    {
+        return view('admin.create.admin_create_new_layer');
+    }
+
+    public function showAdminInfo()
+    {
+        return view('admin.info.admin_info_layer');
+    }
+
     public function doLogin(Request $request)
     {
         $admin = new Admin();
@@ -65,18 +75,19 @@ class AdminController extends Controller
     public function doRegister(Request $request)
     {
         $admin = new Admin();
-        $email = $request->input('login_email');
-        $password = $request->input('login_pwd');
-        $role = $request->input('role');
+        $formData = $request->post();
+        $email = $formData['adminEmail'];
+        $password = $formData['adminPwd'];
+        $role = $formData['adminRole'];
         $adminId = $admin->getAdminId($email);
 
         // 如果没有admin ID就生成新的ID
         if (!$adminId) {
             $cookie = $admin->RegisterSet($email, $password, $role);
         } else {
-            return view('admin.index.admin_index_layer', ['errMSG' => $this->_message['error_message']['register']['existed_user']]);
+            return view('admin.create.admin_create_new_layer', ['errMSG' => $this->_message['error_message']['register']['existed_user']]);
         }
         //dd($request->input('register_email'));
-        return response()->redirectTo('/')->cookie('_zhangfan', $cookie, 60);
+        //return response()->redirectTo('/createAdminIndex')->cookie('_zhangfan', $cookie, 60);
     }
 }

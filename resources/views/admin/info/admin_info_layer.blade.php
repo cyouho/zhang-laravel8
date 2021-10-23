@@ -7,7 +7,7 @@
 
 <body>
     @include('admin.admin_navbar')
-    @include('admin.index.admin_index_contents')
+    @include('admin.info.admin_info_contents')
     @include('global_footer')
 </body>
 

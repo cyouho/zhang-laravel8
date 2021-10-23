@@ -7,8 +7,9 @@
 
 <body>
     @include('admin.admin_navbar')
-    @include('admin.index.admin_index_contents')
+    @include('admin.create.admin_create_new_contents')
     @include('global_footer')
+    @include('admin.create.admin_create_new_msg')
 </body>
 
 </html>
