@@ -37,7 +37,10 @@ class AdminController extends Controller
 
     public function showAdminInfo()
     {
-        return view('admin.info.admin_info_layer');
+        $admin = new Admin();
+        $result = $admin->getAllAdminInfo();
+
+        return view('admin.info.admin_info_layer', ['adminInfo' => $result]);
     }
 
     public function doLogin(Request $request)
@@ -89,5 +92,13 @@ class AdminController extends Controller
         }
         //dd($request->input('register_email'));
         //return response()->redirectTo('/createAdminIndex')->cookie('_zhangfan', $cookie, 60);
+    }
+
+    public function adminInfo()
+    {
+        $admin = new Admin();
+        $result = $admin->getAllAdminInfo();
+        dd($result);
+        return $result;
     }
 }
