@@ -56,6 +56,13 @@ class Admin extends Model
         return $session;
     }
 
+    public function getAllAdminInfo()
+    {
+        $data = DB::select('select admin_id, role, admin_name, admin_email, create_at, last_login_at, total_login_times from admins');
+        $data = array_map('get_object_vars', $data);
+        return $data;
+    }
+
     public function updateLastLoginTime($email)
     {
         $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [time(), $email]);

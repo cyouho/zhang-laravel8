@@ -7,7 +7,9 @@
                 <th>姓名</th>
                 <th>角色</th>
                 <th>邮箱</th>
-                <th>详细</th>
+                <th>账户创建日期</th>
+                <th>最后登录日期</th>
+                <th>登录次数</th>
             </tr>
         </thead>
         <tbody>
@@ -16,21 +18,27 @@
                 <td>Doe</td>
                 <td>超级管理员</td>
                 <td>john@example.com</td>
-                <td><button type="button" class="btn btn-primary btn-sm">详细</button></td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
             </tr>
             <tr>
                 <td>Mary</td>
                 <td>Moe</td>
                 <td>Moe</td>
                 <td>mary@example.com</td>
-                <td><button type="button" class="btn btn-primary btn-sm">详细</button></td>
+                <td>mary@example.com</td>
+                <td>mary@example.com</td>
+                <td>mary@example.com</td>
             </tr>
             <tr>
                 <td>July</td>
                 <td>Dooley</td>
                 <td>Dooley</td>
                 <td>july@example.com</td>
-                <td><button type="button" class="btn btn-primary btn-sm">详细</button></td>
+                <td>july@example.com</td>
+                <td>july@example.com</td>
+                <td>july@example.com</td>
             </tr>
         </tbody>
     </table>
