@@ -102,4 +102,11 @@ class Admin extends Model
 
         return $session;
     }
+
+    public function deleteAdmin($adminId)
+    {
+        $affected = DB::delete('delete from admins where admin_id = ?', [$adminId]);
+
+        return $affected;
+    }
 }

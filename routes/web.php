@@ -124,4 +124,12 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/showAdminInfo', [
         AdminController::class, 'showAdminInfo'
     ]);
+
+    Route::post('/deleteAdmin', [
+        AdminController::class, 'doDeleteAjax'
+    ]);
+
+    Route::get('/showAdminInfoAjax', [
+        AdminController::class, 'showAdminInfoAjax'
+    ]);
 });

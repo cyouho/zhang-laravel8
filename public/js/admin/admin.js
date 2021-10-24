@@ -7,6 +7,18 @@ $(document).ready(function () {
         createAdminAjaxPost(adminRole, adminEmail, adminPwd);
     });
 
+    // $(".delete").click(function () {
+    //     adminId = $(this).attr("id");
+    //     console.log(adminId);
+    //     deleteAdminAjaxPost(adminId);
+    // });
+
+    $(".jumbotron").on("click", ".delete", function () {
+        adminId = $(this).attr("id");
+
+        deleteAdminAjaxPost(adminId);
+    });
+
     function createAdminAjaxPost(adminRole, adminEmail, adminPwd) {
         $.ajax({
             url: "/createAdmin",
@@ -25,6 +37,22 @@ $(document).ready(function () {
                 $("#adminRole").val("2");
                 $("#adminEmail").val("");
                 $("#adminPwd").val("");
+            }
+        });
+    }
+
+    function deleteAdminAjaxPost(adminId) {
+        $.ajax({
+            url: "/deleteAdmin",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                "adminId": adminId
+            },
+            success: function (data) {
+                $(".jumbotron").load("/showAdminInfoAjax")
             }
         });
     }
