@@ -23,10 +23,16 @@ class Admin extends Model
     /**
      * 
      */
-    public function getAdminId($email)
+    public function getAdminId($data)
     {
-        $adminId = DB::select('select admin_id from admins where admin_email = ?', [$email]);
-        return $adminId;
+        $key = key($data);
+        $adminId = DB::select('select admin_id from admins where ' . $key . ' = ?', [$data[$key]]);
+        if ($key === 'admin_email' && !$adminId) {
+            return false;
+        }
+        $adminId = array_map('get_object_vars', $adminId);
+
+        return $adminId[0]['admin_id'];
     }
 
     public function getAdminName($cookie)
@@ -106,6 +112,14 @@ class Admin extends Model
     public function deleteAdmin($adminId)
     {
         $affected = DB::delete('delete from admins where admin_id = ?', [$adminId]);
+
+        return $affected;
+    }
+
+    public function updateAdminPwd($password, $data)
+    {
+        $key = key($data);
+        $affected = DB::update('update admins set admin_password = ? where ' . $key . ' = ?', [Hash::make($password), $data[$key]]);
 
         return $affected;
     }

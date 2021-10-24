@@ -10,12 +10,13 @@
         <div style="position: relative; margin-bottom: 1rem;">
             <input type="email" id="adminEmail" name="admin_email" class="form-control" placeholder="邮箱地址" required autofocus>
         </div>
-        <div id="oldpwd_msg"></div>
+        <p id="created">
+
+        </p>
 
         <div style="position: relative; margin-bottom: 1rem;">
             <input type="password" id="adminPwd" name="admin_pwd" class="form-control" placeholder="密码" required>
         </div>
-        <div id="newpwd_msg"></div>
 
     </form>
     <button id="create" class="btn btn-lg btn-danger btn-block" style="max-width: 420px; margin: auto;" type="submit">创建</button>

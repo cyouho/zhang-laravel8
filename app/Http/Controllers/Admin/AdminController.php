@@ -105,7 +105,10 @@ class AdminController extends Controller
         $admin = new Admin();
         $email = $request->input('login_email');
         $password = $request->input('login_pwd');
-        $adminId = $admin->getAdminId($email);
+        $data = [
+            'admin_email' => $email,
+        ];
+        $adminId = $admin->getAdminId($data);
         $data = [
             'admin_email' => $email,
         ];
@@ -147,13 +150,17 @@ class AdminController extends Controller
         $email = $formData['adminEmail'];
         $password = $formData['adminPwd'];
         $role = $formData['adminRole'];
-        $adminId = $admin->getAdminId($email);
+        $data = [
+            'admin_email' => $email,
+        ];
+        $adminId = $admin->getAdminId($data);
 
         // 如果没有admin ID就生成新的ID
         if (!$adminId) {
             $cookie = $admin->RegisterSet($email, $password, $role);
+            return response()->json('admin_created');
         } else {
-            return view('admin.create.admin_create_new_layer', ['errMSG' => $this->_message['error_message']['register']['existed_user']]);
+            return view('admin.create.admin_create_new_layer', ['errMSG' => $this->_message['error_message']['register']]);
         }
         //dd($request->input('register_email'));
         //return response()->redirectTo('/createAdminIndex')->cookie('_zhangfan', $cookie, 60);
@@ -201,5 +208,17 @@ class AdminController extends Controller
             'adminInfo' => $result,
             'numberOfTotalAdmin' => $totalAdminInfo,
         ]);
+    }
+
+    public function resetAdminPassword(Request $request)
+    {
+        $admin = new Admin();
+        $formData = $request->post();
+        $adminNewPwd = $formData['adminNewPwd'];
+        $adminId = $formData['adminId'];
+        $data = [
+            'admin_id' => $adminId,
+        ];
+        $result = $admin->updateAdminPwd($adminNewPwd, $data);
     }
 }

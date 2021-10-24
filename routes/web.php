@@ -132,4 +132,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/showAdminInfoAjax', [
         AdminController::class, 'showAdminInfoAjax'
     ]);
+
+    Route::post('/resetAdminPassword', [
+        AdminController::class, 'resetAdminPassword'
+    ]);
 });
