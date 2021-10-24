@@ -7,16 +7,23 @@ $(document).ready(function () {
         createAdminAjaxPost(adminRole, adminEmail, adminPwd);
     });
 
-    // $(".delete").click(function () {
-    //     adminId = $(this).attr("id");
-    //     console.log(adminId);
-    //     deleteAdminAjaxPost(adminId);
-    // });
-
     $(".jumbotron").on("click", ".delete", function () {
         adminId = $(this).attr("id");
 
         deleteAdminAjaxPost(adminId);
+    });
+
+    $(".jumbotron").on("click", ".resetPwd", function () {
+        adminId = $(this).attr("id");
+        $("#adminNewPwd").val("");
+        $("#adminModelId").html(adminId);
+    });
+
+    $("#adminResetPwd").click(function () {
+        adminId = $("#adminModelId").text();
+        adminNewPwd = $("#adminNewPwd").val();
+
+        resetAdminPwdAjaxPost(adminId, adminNewPwd)
     });
 
     function createAdminAjaxPost(adminRole, adminEmail, adminPwd) {
@@ -32,11 +39,15 @@ $(document).ready(function () {
                 "adminPwd": adminPwd,
             },
             success: function (data) {
-                $("#created").fadeIn(1000);
-                $("#created").fadeOut(3000);
-                $("#adminRole").val("2");
-                $("#adminEmail").val("");
-                $("#adminPwd").val("");
+                if (data == 'admin_created') {
+                    $("#created").fadeIn(1000);
+                    $("#created").fadeOut(3000);
+                    $("#adminRole").val("2");
+                    $("#adminEmail").val("");
+                    $("#adminPwd").val("");
+                } else {
+                    $("#created").html('账户已存在');
+                }
             }
         });
     }
@@ -53,6 +64,23 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $(".jumbotron").load("/showAdminInfoAjax")
+            }
+        });
+    }
+
+    function resetAdminPwdAjaxPost(adminId, adminNewPwd) {
+        $.ajax({
+            url: "/resetAdminPassword",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                "adminId": adminId,
+                "adminNewPwd": adminNewPwd,
+            },
+            success: function (data) {
+
             }
         });
     }
