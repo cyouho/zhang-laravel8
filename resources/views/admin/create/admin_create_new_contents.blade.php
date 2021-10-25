@@ -10,7 +10,7 @@
         <div style="position: relative; margin-bottom: 1rem;">
             <input type="email" id="adminEmail" name="admin_email" class="form-control" placeholder="邮箱地址" required autofocus>
         </div>
-        <p id="created">
+        <p id="create_errmsg">
 
         </p>
 

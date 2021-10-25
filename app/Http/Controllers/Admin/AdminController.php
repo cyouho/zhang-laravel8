@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Admin;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Controllers\Utils;
 
 class AdminController extends Controller
 {
@@ -23,12 +24,18 @@ class AdminController extends Controller
     private $_role = [];
 
     /**
+     * session
+     */
+    private $_session = '';
+
+    /**
      * 将 config 里的 message 语句复制给 $_message
      */
     public function __construct()
     {
         $this->_message = config('message');
         $this->_role = config('admin.role');
+        $this->_session = Utils::getAdminCookie();
     }
 
     /**
@@ -45,7 +52,16 @@ class AdminController extends Controller
      */
     public function adminIndex()
     {
-        return view('admin.index.admin_index_layer');
+        $admin = new Admin();
+        $lastLoginAt = date('Y-m-d', $admin->getLastLoginTime($this->_session));
+        $totalLoginTimes = $admin->getTotalLoginTimes($this->_session);
+        $createAt = date('Y-m-d', $admin->getRegisterTime($this->_session));
+
+        return view('admin.index.admin_index_layer', ['adminHomePageData' => [
+            $lastLoginAt,     // key: 'last_login_at'
+            $totalLoginTimes, // key: 'total_login_times'
+            $createAt,        // key: 'create_at'
+        ]]);
     }
 
     /**
@@ -220,5 +236,7 @@ class AdminController extends Controller
             'admin_id' => $adminId,
         ];
         $result = $admin->updateAdminPwd($adminNewPwd, $data);
+
+        return $result ? response()->json('admin_pwd_updated') : response()->json('admin_pwd_update_err');
     }
 }

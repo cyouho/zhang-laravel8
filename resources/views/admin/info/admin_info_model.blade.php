@@ -6,8 +6,9 @@
             <!-- 模态框头部 -->
             <div class="modal-header">
                 <h4 class="modal-title">
-                    <p style="display: inline-block;">修改ID:</p>
+                    <p style="display: inline-block;">修改ID为:</p>
                     <p id="adminModelId" style="display: inline-block;"></p>
+                    <p style="display: inline-block;">的管理员密码</p>
                 </h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
@@ -26,3 +27,4 @@
         </div>
     </div>
 </div>
+@include('admin.info.admin_info_model_msg')

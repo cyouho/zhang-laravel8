@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Utils;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Utils as ControllersUtils;
 
 class Admin extends Model
 {
@@ -67,6 +68,27 @@ class Admin extends Model
         $data = DB::select('select admin_id, role, admin_name, admin_email, create_at, last_login_at, total_login_times from admins');
         $data = array_map('get_object_vars', $data);
         return $data;
+    }
+
+    public function getLastLoginTime($session)
+    {
+        $data = DB::select('select last_login_at from admins where admin_session = ?', [$session]);
+        $result = ControllersUtils::getArrFromObj($data);
+        return $result[0] ? $result[0] : '';
+    }
+
+    public function getTotalLoginTimes($session)
+    {
+        $data = DB::select('select total_login_times from admins where admin_session = ?', [$session]);
+        $result = ControllersUtils::getArrFromObj($data);
+        return $result[0] ? $result[0] : '';
+    }
+
+    public function getRegisterTime($session)
+    {
+        $data = DB::select('select create_at from admins where admin_session = ?', [$session]);
+        $result = ControllersUtils::getArrFromObj($data);
+        return $result[0] ? $result[0] : '';
     }
 
     public function updateLastLoginTime($email)

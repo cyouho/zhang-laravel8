@@ -12,6 +12,11 @@ class Utils extends Controller
         return request()->cookie('_cyouho');
     }
 
+    public static function getAdminCookie()
+    {
+        return request()->cookie('_zhangfan');
+    }
+
     public static function getArrFromObj($data)
     {
         return array_map('get_object_vars', $data);
