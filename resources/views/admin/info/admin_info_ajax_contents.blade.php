@@ -58,11 +58,15 @@
             <td>{{date("Y-m-d H:i:s", $value['last_login_at'])}}</td>
             <td>{{$value['total_login_times']}}</td>
             @if ($adminData['adminName'] !== $value['admin_name'])
-            <td><button type="button" id="{{$value['admin_id']}}" class="btn btn-warning btn-sm resetPwd" data-toggle="modal" data-target="#myModal">修改密码</button></td>
-            <td><button type="button" id="{{$value['admin_id']}}" class="btn btn-danger btn-sm delete">删除</button></td>
+            <td>
+                <button type="button" id="{{$value['admin_id']}}" class="btn btn-warning btn-sm resetPwd" data-toggle="modal" data-target="#myModal">修改密码</button>
+                <button type="button" id="{{$value['admin_id']}}" class="btn btn-danger btn-sm delete">删除</button>
+            </td>
             @else
-            <td><button type="button" id="{{$value['admin_id']}}" class="btn btn-warning btn-sm resetPwd" data-toggle="modal" data-target="#myModal">修改密码</button></td>
-            <td><button type="button" id="{{$value['admin_id']}}" class="btn btn-secondary btn-sm delete" disabled>删除</button></td>
+            <td>
+                <button type="button" id="{{$value['admin_id']}}" class="btn btn-warning btn-sm resetPwd" data-toggle="modal" data-target="#myModal">修改密码</button>
+                <button type="button" id="{{$value['admin_id']}}" class="btn btn-secondary btn-sm delete" disabled>删除</button>
+            </td>
             @endif
         </tr>
         @endforeach

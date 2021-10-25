@@ -40,13 +40,13 @@ $(document).ready(function () {
             },
             success: function (data) {
                 if (data == 'admin_created') {
-                    $("#created").fadeIn(1000);
-                    $("#created").fadeOut(3000);
+                    $("#created").fadeIn(1000).delay(1000).fadeOut(2000);
+                    $("#create_errmsg").html("");
                     $("#adminRole").val("2");
                     $("#adminEmail").val("");
                     $("#adminPwd").val("");
                 } else {
-                    $("#created").html('账户已存在');
+                    $("#create_errmsg").html('账户已存在');
                 }
             }
         });
@@ -80,7 +80,8 @@ $(document).ready(function () {
                 "adminNewPwd": adminNewPwd,
             },
             success: function (data) {
-
+                selector = '#' + data;
+                $(selector).slideDown(1000).delay(2000).slideUp(1000);
             }
         });
     }
