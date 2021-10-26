@@ -181,6 +181,11 @@ class AdminController extends Controller
         //dd($request->input('register_email'));
         //return response()->redirectTo('/createAdminIndex')->cookie('_zhangfan', $cookie, 60);
     }
+
+    /**
+     * 删除管理员的 ajax 方法
+     * @param Request $request
+     */
     public function doDeleteAjax(Request $request)
     {
         $admin = new Admin();
@@ -191,6 +196,10 @@ class AdminController extends Controller
         //$this->showAdminInfoAjax();
     }
 
+    /**
+     * 显示管理员删除后的所有管理员的 ajax 方法
+     * @return mix view
+     */
     public function showAdminInfoAjax()
     {
         $admin = new Admin();
@@ -226,6 +235,11 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * 修改管理员密码的 ajax 方法
+     * @param Request $request
+     * @return json
+     */
     public function resetAdminPassword(Request $request)
     {
         $admin = new Admin();
