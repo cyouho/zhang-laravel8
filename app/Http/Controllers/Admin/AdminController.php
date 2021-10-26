@@ -58,9 +58,9 @@ class AdminController extends Controller
         $createAt = date('Y-m-d', $admin->getRegisterTime($this->_session));
 
         return view('admin.index.admin_index_layer', ['adminHomePageData' => [
-            $lastLoginAt,     // key: 'last_login_at'
-            $totalLoginTimes, // key: 'total_login_times'
-            $createAt,        // key: 'create_at'
+            'last_login_at'     => $lastLoginAt,     // key: 'last_login_at'
+            'total_login_times' => $totalLoginTimes, // key: 'total_login_times'
+            'create_at'         => $createAt,        // key: 'create_at'
         ]]);
     }
 

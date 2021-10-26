@@ -12,7 +12,7 @@
                 <p>上次登录时间</p>
                 <h3>
                     @if (isset($adminHomePageData['last_login_at']))
-                    {{date('Y-m-d', $adminHomePageData['last_login_at'])}}
+                    {{$adminHomePageData['last_login_at']}}
                     @endif
                 </h3>
                 <h5></h5>
@@ -29,7 +29,7 @@
                 <p>注册时间</p>
                 <h3>
                     @if (isset($adminHomePageData['create_at']))
-                    {{date('Y-m-d', $adminHomePageData['create_at'])}}
+                    {{$adminHomePageData['create_at']}}
                     @endif
                 </h3>
                 <h5></h5>
