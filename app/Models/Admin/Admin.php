@@ -74,21 +74,21 @@ class Admin extends Model
     {
         $data = DB::select('select last_login_at from admins where admin_session = ?', [$session]);
         $result = ControllersUtils::getArrFromObj($data);
-        return $result[0] ? $result[0] : '';
+        return $result[0]['last_login_at'] ? $result[0]['last_login_at'] : '';
     }
 
     public function getTotalLoginTimes($session)
     {
         $data = DB::select('select total_login_times from admins where admin_session = ?', [$session]);
         $result = ControllersUtils::getArrFromObj($data);
-        return $result[0] ? $result[0] : '';
+        return $result[0]['total_login_times'] ? $result[0]['total_login_times'] : '';
     }
 
     public function getRegisterTime($session)
     {
         $data = DB::select('select create_at from admins where admin_session = ?', [$session]);
         $result = ControllersUtils::getArrFromObj($data);
-        return $result[0] ? $result[0] : '';
+        return $result[0]['create_at'] ? $result[0]['create_at'] : '';
     }
 
     public function updateLastLoginTime($email)
