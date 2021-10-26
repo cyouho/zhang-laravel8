@@ -11,6 +11,7 @@ use App\Http\Controllers\myPage\myHomePageController;
 use App\Http\Controllers\myPage\profileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Middleware\Admin;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,5 +136,13 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('/resetAdminPassword', [
         AdminController::class, 'resetAdminPassword'
+    ]);
+
+    Route::get('/admin/showUsers', [
+        UsersController::class, 'showUsersIndex'
+    ]);
+
+    Route::post('/searchUserInfo', [
+        UsersController::class, 'showUsersInfoIndexAjax'
     ]);
 });
