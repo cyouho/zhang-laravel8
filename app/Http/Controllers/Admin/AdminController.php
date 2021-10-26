@@ -192,8 +192,17 @@ class AdminController extends Controller
         $formData = $request->post();
         $adminId = $formData['adminId'];
 
-        $result = $admin->deleteAdmin($adminId);
-        //$this->showAdminInfoAjax();
+        // 获取当前登录管理员的ID
+        $adminSession = Utils::getAdminCookie();
+        $data = [
+            'admin_session' => $adminSession,
+        ];
+        $thisAdminId = $admin->getAdminId($data);
+
+        // 判断需要删除的管理员ID和当前登录的管理员ID是否相同，不相同才进行删除
+        if ($adminId !== $thisAdminId) {
+            $result = $admin->deleteAdmin($adminId);
+        }
     }
 
     /**
