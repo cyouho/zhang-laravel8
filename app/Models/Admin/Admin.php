@@ -94,9 +94,9 @@ class Admin extends Model
     public function getResetUserPwdRecord($data)
     {
         $key = key($data);
-        $result = DB::select('select admin_id, admin_name, update_at, total_update_times from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
+        $result = DB::select('select admin_id, admin_name, update_at from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
         $result = ControllersUtils::getArrFromObj($result);
-        return isset($result[0]) ? $result[0] : '';
+        return isset($result) ? $result : '';
     }
 
     public function updateLastLoginTime($email)
@@ -139,14 +139,16 @@ class Admin extends Model
         return $session;
     }
 
-    public function insertUserPwdUpdateRecord()
+    public function insertUserPwdUpdateRecord($adminId, $adminName)
     {
+        $timestamp = time();
+
         $data = [
-            'admin_id'           => '',
-            'admin_name'         => '',
-            'update_at'          => '',
-            'total_update_times' => ''
+            'admin_id'           => $adminId,
+            'admin_name'         => $adminName,
+            'update_at'          => $timestamp,
         ];
+        $affected = DB::insert('insert into reset_pwd_record (admin_id, admin_name, update_at) values (?, ?, ?)', [$data['admin_id'], $data['admin_name'], $data['update_at']]);
     }
 
     public function deleteAdmin($adminId)

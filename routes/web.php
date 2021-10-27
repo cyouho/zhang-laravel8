@@ -149,4 +149,8 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/resetAdminUserPassword', [
         UsersController::class, 'resetAdminUserPasswordAjax'
     ]);
+
+    Route::get('/showResetPwdRecord', [
+        UsersController::class, 'showResetUserPwdInfo'
+    ]);
 });

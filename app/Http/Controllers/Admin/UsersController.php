@@ -23,13 +23,15 @@ class UsersController extends Controller
         return view('admin.users.admin_users_layer');
     }
 
+    /**
+     * 第一次通过form提交查询到的用户详细信息页面
+     */
     public function showUsersInfoIndex(Request $request)
     {
         $searchRole = $request->input('search_role');
         $searchText = $request->input('search_text');
-
-        $adminName = [
-            'admin_id' => $request->input('admin_name'),
+        $adminId = [
+            'admin_id' => $request->input('admin_id'),
         ];
 
         $data = [
@@ -39,18 +41,24 @@ class UsersController extends Controller
         $user = new User();
         $admin = new Admin();
         $result = $user->getUserInfo($data);
-        $resetPwdRecord = $admin->getResetUserPwdRecord($adminName);
+        $resetPwdRecord = $admin->getResetUserPwdRecord($adminId);
+        //dd($resetPwdRecord);
 
         if (isset($result[0])) {
             $viewData = $result[0];
             return view('admin.users.detail.admin_user_detail_layer', [
-                'userData'       => $viewData,
+                'userData'        => $viewData,
+                'resetPwdRecord'  => $resetPwdRecord,
+                'totalResetTimes' => count($resetPwdRecord),
             ]);
         }
 
         return view('admin.users.detail.admin_user_detail_layer');
     }
 
+    /**
+     * 通过ajax的post方法修改用户密码的方法
+     */
     public function resetAdminUserPasswordAjax(Request $request)
     {
         $formData = $request->post();
@@ -63,7 +71,9 @@ class UsersController extends Controller
             'user_id' => $formData['resetUserId'],
         ];
         $user = new User();
+        $admin = new Admin();
         $result = $user->updateUserPwd($password, $data);
+        $admin->insertUserPwdUpdateRecord($formData['adminId'], $formData['adminName']);
 
         $jsonData = [
             'updated'    => 'updated',
@@ -76,5 +86,12 @@ class UsersController extends Controller
     public function showResetUserPwdInfo()
     {
         $admin = new Admin();
+        $adminId = $this->_resetPwdAdmin['admin_id'];
+        $resetPwdRecord = $admin->getResetUserPwdRecord($adminId);
+
+        return view('admin.users.detail.admin_user_detail_reset_user_pwd_ajax', [
+            'resetPwdRecord'  => $resetPwdRecord,
+            'totalResetTimes' => count($resetPwdRecord),
+        ]);
     }
 }
