@@ -1,23 +1,42 @@
 $(document).ready(function () {
-    $("#user_id").click(function () {
-        userId = $(this).attr("value");
-        userInfo = $("#info").val();
-
+    $(".resetUserPwd").click(function () {
+        userId = $(this).attr("id");
+        $("#adminUserNewPwd").val("");
+        $("#adminUserModelId").html(userId);
     });
 
-    function showUserInfoAjaxPost(userId, userInfo) {
+    $("#adminUserResetPwd").click(function () {
+        resetUserId = $("#adminUserModelId").text();
+        resetUserPwd = $("#adminUserNewPwd").val();
+        adminId = $(".resetUserPwd").attr("adminId");
+        adminName = $(".resetUserPwd").attr("adminName");
+        console.log(adminName);
+
+        if (resetUserPwd == '') {
+            alert('新密码不能为空');
+            return false;
+        }
+
+        adminUserPwdResetAjaxPost(resetUserId, resetUserPwd, adminId, adminName);
+    });
+
+    function adminUserPwdResetAjaxPost(resetUserId, resetUserPwd) {
         $.ajax({
-            url: "/searchUserInfo",
+            url: "/resetAdminUserPassword",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-                "userId": userId,
-                "userInfo": userInfo
+                "resetUserId": resetUserId,
+                "resetUserPwd": resetUserPwd,
+                'adminId': adminId,
+                'adminName': adminName,
             },
             success: function (data) {
-
+                selector = '#' + data;
+                $(selector).slideDown(1000).delay(2000).slideUp(1000);
+                //$("#resetPwdAjax").load();
             }
         });
     }
