@@ -41,13 +41,15 @@
             </tr>
         </thead>
         <tbody id="resetPwdAjax">
-            @if (isset($userData))
+            @if (isset($resetPwdRecord))
+            @foreach ($resetPwdRecord as $value)
             <tr>
-                <td>{{$userData['user_id']}}</td>
-                <td>{{$userData['user_name']}}</td>
-                <td>{{date("Y-m-d H:i:s", $userData['create_at'])}}</td>
-                <td>{{date("Y-m-d H:i:s", $userData['last_login_at'])}}</td>
+                <td>{{$value['admin_id']}}</td>
+                <td>{{$value['admin_name']}}</td>
+                <td>{{date("Y-m-d H:i:s", $value['update_at'])}}</td>
+                <td>{{$totalResetTimes}}</td>
             </tr>
+            @endforeach
             @endif
         </tbody>
     </table><br>
