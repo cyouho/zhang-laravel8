@@ -143,6 +143,10 @@ Route::middleware(['admin'])->group(function () {
     ]);
 
     Route::post('/searchUserInfo', [
-        UsersController::class, 'showUsersInfoIndexAjax'
+        UsersController::class, 'showUsersInfoIndex'
+    ]);
+
+    Route::post('/resetAdminUserPassword', [
+        UsersController::class, 'resetAdminUserPasswordAjax'
     ]);
 });

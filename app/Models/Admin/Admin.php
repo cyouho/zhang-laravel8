@@ -91,6 +91,14 @@ class Admin extends Model
         return $result[0]['create_at'] ? $result[0]['create_at'] : '';
     }
 
+    public function getResetUserPwdRecord($data)
+    {
+        $key = key($data);
+        $result = DB::select('select admin_id, admin_name, update_at, total_update_times from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
+        $result = ControllersUtils::getArrFromObj($result);
+        return isset($result[0]) ? $result[0] : '';
+    }
+
     public function updateLastLoginTime($email)
     {
         $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [time(), $email]);
@@ -129,6 +137,16 @@ class Admin extends Model
         DB::insert('insert into admins (role, admin_name, admin_email, admin_password, admin_session, create_at, updated_at, last_login_at, total_login_times) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['role'], $data['admin_name'], $data['admin_email'], $data['admin_password'], $data['admin_session'], $data['create_at'], $data['updated_at'], $data['last_login_at'], $data['total_login_times']]);
 
         return $session;
+    }
+
+    public function insertUserPwdUpdateRecord()
+    {
+        $data = [
+            'admin_id'           => '',
+            'admin_name'         => '',
+            'update_at'          => '',
+            'total_update_times' => ''
+        ];
     }
 
     public function deleteAdmin($adminId)

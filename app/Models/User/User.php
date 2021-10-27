@@ -107,6 +107,13 @@ class User extends Model
         return ControllersUtils::getArrFromObj($data);
     }
 
+    public function getUserInfo($data)
+    {
+        $key = key($data);
+        $result = DB::select('select user_id, user_name, email, create_at, last_login_at, total_login_times from users where ' . $key . ' = ?', [$data[$key]]);
+        return ControllersUtils::getArrFromObj($result);
+    }
+
     /**
      * 
      */
