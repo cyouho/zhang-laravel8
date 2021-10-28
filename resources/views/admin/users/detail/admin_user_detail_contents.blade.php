@@ -37,7 +37,6 @@
                 <th>管理员ID</th>
                 <th>管理员姓名</th>
                 <th>修改用户密码日期</th>
-                <th>修改次数</th>
             </tr>
         </thead>
         <tbody id="resetPwdAjax">
@@ -47,7 +46,6 @@
                 <td>{{$value['admin_id']}}</td>
                 <td>{{$value['admin_name']}}</td>
                 <td>{{date("Y-m-d H:i:s", $value['update_at'])}}</td>
-                <td>{{$totalResetTimes}}</td>
             </tr>
             @endforeach
             @endif
