@@ -83,10 +83,13 @@ class UsersController extends Controller
         return $result ? response()->json($jsonData['updated']) : response()->json($jsonData['update_err']);
     }
 
-    public function showResetUserPwdInfo()
+    public function showResetUserPwdInfo(Request $request)
     {
         $admin = new Admin();
-        $adminId = $this->_resetPwdAdmin['admin_id'];
+        $formData = $request->post();
+        $adminId = [
+            'admin_id' => $formData['admin_id'],
+        ];
         $resetPwdRecord = $admin->getResetUserPwdRecord($adminId);
 
         return view('admin.users.detail.admin_user_detail_reset_user_pwd_ajax', [
