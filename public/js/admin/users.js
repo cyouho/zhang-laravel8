@@ -36,8 +36,7 @@ $(document).ready(function () {
             success: function (data) {
                 selector = '#' + data;
                 $(selector).slideDown(1000).delay(2000).slideUp(1000);
-                token = $('meta[name="csrf-token"]').attr('content');
-                $("#resetPwdAjax").load("/showResetPwdRecord", { 'admin_id': adminId, '_token': token });
+                $("#resetPwdAjax").load("/showResetPwdRecord");
             }
         });
     }

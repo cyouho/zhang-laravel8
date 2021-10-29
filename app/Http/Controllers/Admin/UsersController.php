@@ -41,7 +41,7 @@ class UsersController extends Controller
         $user = new User();
         $admin = new Admin();
         $result = $user->getUserInfo($data);
-        $resetPwdRecord = $admin->getResetUserPwdRecord($adminId);
+        $resetPwdRecord = $admin->getResetUserPwdRecord();
         //dd($resetPwdRecord);
 
         if (isset($result[0])) {
@@ -83,14 +83,18 @@ class UsersController extends Controller
         return $result ? response()->json($jsonData['updated']) : response()->json($jsonData['update_err']);
     }
 
-    public function showResetUserPwdInfo(Request $request)
+    /**
+     * 管理员修改密码记录的 ajax 方法
+     */
+    public function showResetUserPwdInfoAjax(Request $request)
     {
         $admin = new Admin();
-        $formData = $request->post();
-        $adminId = [
-            'admin_id' => $formData['admin_id'],
-        ];
-        $resetPwdRecord = $admin->getResetUserPwdRecord($adminId);
+        // 暂时不需要检索特定 ID 的结果
+        // $formData = $request->post();
+        // $adminId = [
+        //     'admin_id' => $formData['admin_id'],
+        // ];
+        $resetPwdRecord = $admin->getResetUserPwdRecord();
 
         return view('admin.users.detail.admin_user_detail_reset_user_pwd_ajax', [
             'resetPwdRecord'  => $resetPwdRecord,
