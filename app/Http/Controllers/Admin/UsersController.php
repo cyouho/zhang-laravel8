@@ -41,7 +41,11 @@ class UsersController extends Controller
         $user = new User();
         $admin = new Admin();
         $result = $user->getUserInfo($data);
-        $resetPwdRecord = $admin->getResetUserPwdRecord();
+
+        $userData = [
+            'user_id' => $result[0]['user_id'],
+        ];
+        $resetPwdRecord = $admin->getResetUserPwdRecordByID($userData);
         //dd($resetPwdRecord);
 
         if (isset($result[0])) {
@@ -73,7 +77,7 @@ class UsersController extends Controller
         $user = new User();
         $admin = new Admin();
         $result = $user->updateUserPwd($password, $data);
-        $admin->insertUserPwdUpdateRecord($formData['adminId'], $formData['adminName']);
+        $admin->insertUserPwdUpdateRecord($formData['adminId'], $formData['adminName'], $data['user_id']);
 
         $jsonData = [
             'updated'    => 'updated',
@@ -89,12 +93,12 @@ class UsersController extends Controller
     public function showResetUserPwdInfoAjax(Request $request)
     {
         $admin = new Admin();
-        // 暂时不需要检索特定 ID 的结果
-        // $formData = $request->post();
-        // $adminId = [
-        //     'admin_id' => $formData['admin_id'],
-        // ];
-        $resetPwdRecord = $admin->getResetUserPwdRecord();
+
+        $formData = $request->post();
+        $userId = [
+            'user_id' => $formData['user_id'],
+        ];
+        $resetPwdRecord = $admin->getResetUserPwdRecordByID($userId);
 
         return view('admin.users.detail.admin_user_detail_reset_user_pwd_ajax', [
             'resetPwdRecord'  => $resetPwdRecord,

@@ -23,7 +23,7 @@
                 <td>{{date("Y-m-d H:i:s", $userData['last_login_at'])}}</td>
                 <td>{{$userData['total_login_times']}}</td>
                 <td>
-                    <button type="button" id="{{$userData['user_id']}}" class="btn btn-warning btn-sm resetUserPwd" data-toggle="modal" data-target="#resetPwdModal" adminId="{{$adminData['adminId']}}" adminName="{{$adminData['adminName']}}">修改密码</button>
+                    <button type="button" id="{{$userData['user_id']}}" class="btn btn-warning btn-sm resetUserPwd" data-toggle="modal" data-target="#resetPwdModal" adminId="{{$adminData['adminId']}}" adminName="{{$adminData['adminName']}}" userId="{{$userData['user_id']}}">修改密码</button>
                     <button type="button" id="{{$userData['user_id']}}" class="btn btn-danger btn-sm deleteUser">删除</button>
                 </td>
             </tr>
