@@ -17,7 +17,7 @@
                 <a class="dropdown-item" href="/createAdminIndex">创建新管理员</a>
                 <a class="dropdown-item" href="/showAdminInfo">管理员信息一览</a>
                 @endif
-                <a class="dropdown-item" href="/admin/showUsers">用户管理</a>
+                <a class="dropdown-item" href="/admin/showUsers">用户信息</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/adminLogout">退出</a>
             </div>

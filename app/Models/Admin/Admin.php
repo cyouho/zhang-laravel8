@@ -91,10 +91,17 @@ class Admin extends Model
         return $result[0]['create_at'] ? $result[0]['create_at'] : '';
     }
 
-    public function getResetUserPwdRecord($data)
+    public function getResetUserPwdRecordByID($data)
     {
         $key = key($data);
         $result = DB::select('select admin_id, admin_name, update_at from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
+        $result = ControllersUtils::getArrFromObj($result);
+        return isset($result) ? $result : '';
+    }
+
+    public function getResetUserPwdRecord()
+    {
+        $result = DB::select('select admin_id, admin_name, update_at from reset_pwd_record');
         $result = ControllersUtils::getArrFromObj($result);
         return isset($result) ? $result : '';
     }
