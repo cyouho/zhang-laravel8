@@ -150,7 +150,7 @@ Route::middleware(['admin'])->group(function () {
         UsersController::class, 'resetAdminUserPasswordAjax'
     ]);
 
-    Route::get('/showResetPwdRecord', [
+    Route::post('/showResetPwdRecord', [
         UsersController::class, 'showResetUserPwdInfoAjax'
     ]);
 });

@@ -94,14 +94,14 @@ class Admin extends Model
     public function getResetUserPwdRecordByID($data)
     {
         $key = key($data);
-        $result = DB::select('select admin_id, admin_name, update_at from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
+        $result = DB::select('select admin_id, user_id, admin_name, update_at from reset_pwd_record where ' . $key . ' = ?', [$data[$key]]);
         $result = ControllersUtils::getArrFromObj($result);
         return isset($result) ? $result : '';
     }
 
     public function getResetUserPwdRecord()
     {
-        $result = DB::select('select admin_id, admin_name, update_at from reset_pwd_record');
+        $result = DB::select('select admin_id, user_id, admin_name, update_at from reset_pwd_record');
         $result = ControllersUtils::getArrFromObj($result);
         return isset($result) ? $result : '';
     }
@@ -146,16 +146,17 @@ class Admin extends Model
         return $session;
     }
 
-    public function insertUserPwdUpdateRecord($adminId, $adminName)
+    public function insertUserPwdUpdateRecord($adminId, $adminName, $userId)
     {
         $timestamp = time();
 
         $data = [
             'admin_id'           => $adminId,
+            'user_id'            => $userId,
             'admin_name'         => $adminName,
             'update_at'          => $timestamp,
         ];
-        $affected = DB::insert('insert into reset_pwd_record (admin_id, admin_name, update_at) values (?, ?, ?)', [$data['admin_id'], $data['admin_name'], $data['update_at']]);
+        $affected = DB::insert('insert into reset_pwd_record (admin_id, user_id, admin_name, update_at) values (?, ?, ?, ?)', [$data['admin_id'], $data['user_id'], $data['admin_name'], $data['update_at']]);
     }
 
     public function deleteAdmin($adminId)

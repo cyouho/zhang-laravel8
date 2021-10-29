@@ -36,7 +36,8 @@ $(document).ready(function () {
             success: function (data) {
                 selector = '#' + data;
                 $(selector).slideDown(1000).delay(2000).slideUp(1000);
-                $("#resetPwdAjax").load("/showResetPwdRecord");
+                token = $('meta[name="csrf-token"]').attr('content');
+                $("#resetPwdAjax").load("/showResetPwdRecord", { 'user_id': resetUserId, '_token': token });
             }
         });
     }
