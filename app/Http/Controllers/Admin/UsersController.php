@@ -43,7 +43,7 @@ class UsersController extends Controller
         $result = $user->getUserInfo($data);
 
         $userData = [
-            'user_id' => $result[0]['user_id'],
+            'user_id' => isset($result[0]['user_id']) ? $result[0]['user_id'] : '',
         ];
         $resetPwdRecord = $admin->getResetUserPwdRecordByID($userData);
         //dd($resetPwdRecord);
