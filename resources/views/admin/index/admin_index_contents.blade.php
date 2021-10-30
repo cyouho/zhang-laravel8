@@ -9,7 +9,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-4">
-                <p>上次登录时间</p>
+                <p>最后登录时间</p>
                 <h3>
                     @if (isset($adminHomePageData['last_login_at']))
                     {{$adminHomePageData['last_login_at']}}
