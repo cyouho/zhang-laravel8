@@ -26,6 +26,8 @@ $(document).ready(function () {
         resetAdminPwdAjaxPost(adminId, adminNewPwd)
     });
 
+    adminLoginSituation();
+
     function createAdminAjaxPost(adminRole, adminEmail, adminPwd) {
         $.ajax({
             url: "/createAdmin",
@@ -84,5 +86,40 @@ $(document).ready(function () {
                 $(selector).slideDown(1000).delay(2000).slideUp(1000);
             }
         });
+    }
+
+    function adminLoginSituation() {
+        var myChart = echarts.init(document.getElementById('main'));
+        window.onresize = function () {
+            myChart.resize();
+        };
+
+        // 指定图表的配置项和数据
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'cross' }
+            },
+            legend: {
+                data: ['登录次数']
+            },
+            xAxis: {
+                name: '登录时间',
+                data: ['2021-10-01', '2021-10-02', '2021-10-03', '2021-10-04', '2021-10-05', '2021-10-06', '2021-10-07']
+            },
+            yAxis: {
+                name: '登陆次数'
+            },
+            series: [
+                {
+                    name: '登陆次数',
+                    type: 'line',
+                    data: [5, 20, 36, 10, 10, 20, 40]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
     }
 });
