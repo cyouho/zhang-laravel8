@@ -22,7 +22,9 @@ class Admin extends Model
     }
 
     /**
-     * 
+     * 获取 admin 的 ID
+     * @param array $data
+     * @return string $adminId 
      */
     public function getAdminId($data)
     {
@@ -106,14 +108,33 @@ class Admin extends Model
         return isset($result) ? $result : '';
     }
 
-    public function updateLastLoginTime($email)
+    public function updateLastLoginTime($email, $loginTime)
     {
-        $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [time(), $email]);
+        $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [$loginTime, $email]);
     }
 
     public function updateTotalLoginTimes($email)
     {
         $affected = DB::update('update admins set total_login_times = total_login_times + 1 where admin_email = ?', [$email]);
+    }
+
+    public function updateAdminLoginTimes($recordId)
+    {
+        $affected = DB::update('update admin_login_record set login_times = login_times + 1 where record_id = ?', [$recordId]);
+    }
+
+    public function updateAdminLoginInfo($loginTime, $email)
+    {
+        $adminId = $this->getAdminId(['admin_email' => $email]);
+        $result = DB::select('select record_id, login_day from admin_login_record where from_unixtime(login_day, "%Y%m%d") = curdate() and admin_id = ?', [$adminId]);
+
+        if (!$result) {
+            $this->insertAdminLoginRecord($email, $loginTime);
+        } else {
+            $result = ControllersUtils::getArrFromObj($result);
+            $recordId = $result[0]['record_id'];
+            $this->updateAdminLoginTimes($recordId);
+        }
     }
 
     public function checkUserPwd($password, $data)
@@ -143,6 +164,9 @@ class Admin extends Model
         ];
         DB::insert('insert into admins (role, admin_name, admin_email, admin_password, admin_session, create_at, updated_at, last_login_at, total_login_times) values (?, ?, ?, ?, ?, ?, ?, ?, ?)', [$data['role'], $data['admin_name'], $data['admin_email'], $data['admin_password'], $data['admin_session'], $data['create_at'], $data['updated_at'], $data['last_login_at'], $data['total_login_times']]);
 
+        // 建立第一次 admin 的登录信息
+        $this->insertAdminLoginRecord($adminName, $timestamp);
+
         return $session;
     }
 
@@ -157,6 +181,27 @@ class Admin extends Model
             'update_at'          => $timestamp,
         ];
         $affected = DB::insert('insert into reset_pwd_record (admin_id, user_id, admin_name, update_at) values (?, ?, ?, ?)', [$data['admin_id'], $data['user_id'], $data['admin_name'], $data['update_at']]);
+    }
+
+    /**
+     * 插入 admin 登录记录
+     * table: admin_login_record
+     * @param string $adminName
+     * @param string $timestamp
+     */
+    public function insertAdminLoginRecord($email, $timestamp)
+    {
+        $data = [
+            'admin_email' => $email,
+        ];
+        $adminId = $this->getAdminId($data);
+
+        $insertData = [
+            'admin_id'    => $adminId,
+            'login_day'   => $timestamp,
+            'login_times' => 1,
+        ];
+        $affected = DB::insert('insert into admin_login_record (admin_id, login_day, login_times) values (?, ?, ?)', [$insertData['admin_id'], $insertData['login_day'], $insertData['login_times']]);
     }
 
     public function deleteAdmin($adminId)

@@ -139,7 +139,10 @@ class AdminController extends Controller
             ]]);
         }
 
-        $admin->updateLastLoginTime($email);
+        $loginTime = time();
+        $admin->updateLastLoginTime($email, $loginTime);
+        $admin->updateAdminLoginInfo($loginTime, $email);
+
         $admin->updateTotalLoginTimes($email);
         $cookie = $admin->getSeesion($email);
         return response()->redirectTo('/adminIndex')->cookie('_zhangfan', $cookie, 60);
