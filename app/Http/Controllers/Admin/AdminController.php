@@ -53,14 +53,19 @@ class AdminController extends Controller
     public function adminIndex()
     {
         $admin = new Admin();
+        $adminId = $admin->getAdminId(['admin_session' => $this->_session]);
         $lastLoginAt = date('Y-m-d', $admin->getLastLoginTime($this->_session));
         $totalLoginTimes = $admin->getTotalLoginTimes($this->_session);
         $createAt = date('Y-m-d', $admin->getRegisterTime($this->_session));
 
+        // 获取 admin 首页折线图数据
+        $adminLoginRecord = $admin->getAdminLoginRecord(['admin_id' => $adminId]);
+
         return view('admin.index.admin_index_layer', ['adminHomePageData' => [
-            'last_login_at'     => $lastLoginAt,     // key: 'last_login_at'
-            'total_login_times' => $totalLoginTimes, // key: 'total_login_times'
-            'create_at'         => $createAt,        // key: 'create_at'
+            'last_login_at'     => $lastLoginAt,      // string key: 'last_login_at'
+            'total_login_times' => $totalLoginTimes,  // string key: 'total_login_times'
+            'create_at'         => $createAt,         // string key: 'create_at'
+            'login_record'      => $adminLoginRecord, // array  key: 0 => 'login_day', 'login_times'
         ]]);
     }
 
@@ -141,6 +146,8 @@ class AdminController extends Controller
 
         $loginTime = time();
         $admin->updateLastLoginTime($email, $loginTime);
+
+        // 获取 admin 登录记录
         $admin->updateAdminLoginInfo($loginTime, $email);
 
         $admin->updateTotalLoginTimes($email);
@@ -264,5 +271,27 @@ class AdminController extends Controller
         $result = $admin->updateAdminPwd($adminNewPwd, $data);
 
         return $result ? response()->json('admin_pwd_updated') : response()->json('admin_pwd_update_err');
+    }
+
+    /**
+     * 获取 admin 首页登录情况 ajax 方法
+     */
+    public function adminLoginRecordAjax()
+    {
+        $admin = new Admin();
+        $adminId = $admin->getAdminId(['admin_session' => $this->_session]);
+        $adminLoginRecord = $admin->getAdminLoginRecord(['admin_id' => $adminId]);
+
+        // 处理返回首页的数据
+        for ($i = 0; $i < 7; $i++) {
+            if (!isset($adminLoginRecord[$i])) {
+                array_push($adminLoginRecord, [
+                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
+                    'login_times' => 0,
+                ]);
+            }
+        }
+
+        return $adminLoginRecord ? response()->json($adminLoginRecord) : '';
     }
 }
