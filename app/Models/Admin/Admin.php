@@ -108,6 +108,15 @@ class Admin extends Model
         return isset($result) ? $result : '';
     }
 
+    public function getAdminLoginRecord($data)
+    {
+        $key = key($data);
+        $result = DB::select('select from_unixtime(login_day, "%Y-%m-%d") as login_day, login_times from admin_login_record where ' . $key . ' = ? and date_sub(curdate(), interval 7 day) <= from_unixtime(login_day, "%Y-%m-%d") order by login_day desc', [$data[$key]]);
+        $result = ControllersUtils::getArrFromObj($result);
+
+        return isset($result) ? $result : '';
+    }
+
     public function updateLastLoginTime($email, $loginTime)
     {
         $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [$loginTime, $email]);
@@ -123,6 +132,9 @@ class Admin extends Model
         $affected = DB::update('update admin_login_record set login_times = login_times + 1 where record_id = ?', [$recordId]);
     }
 
+    /**
+     * 获取 admin 登录记录方法
+     */
     public function updateAdminLoginInfo($loginTime, $email)
     {
         $adminId = $this->getAdminId(['admin_email' => $email]);

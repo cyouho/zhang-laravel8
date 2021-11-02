@@ -7,7 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-<p align="center"><a href="https://github.com/cyouho/zhang-laravel8" target="_blank"><img src="public/images/repository/repository01.png"></a></p>
+<p align="center">用户界面<a href="https://github.com/cyouho/zhang-laravel8" target="_blank"><img src="public/images/repository/repository01.png"></a></p>
+
+<p align="center">管理员界面<a href="https://github.com/cyouho/zhang-laravel8" target="_blank"><img src="public/images/repository/repository02.png"></a></p>
 
 ## 关于此仓库
 - 本仓库代码仅供学习交流使用，请勿用于商业用途，谢谢。

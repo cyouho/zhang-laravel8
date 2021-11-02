@@ -36,7 +36,7 @@
             </div>
         </div>
     </div><br><br>
-    <h3 class="text-center">登录情况一览</h3>
+    <h3 class="text-center">近7天登录情况一览</h3>
     <div id="main">
 
     </div>
