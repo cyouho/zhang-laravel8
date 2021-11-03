@@ -21,4 +21,7 @@
             <h5>{{$myPageData['registerTime']['min']}}</h5>
         </div>
     </div>
+    <div id="homePage">
+
+    </div>
 </div>
