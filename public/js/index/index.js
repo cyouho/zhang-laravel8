@@ -47,6 +47,8 @@ $(document).ready(function () {
         ajaxPost(site, imageUrl);
     });
 
+    userLoginRecord();
+
     function ajaxPost(site, imageUrl) {
         newwindow = window.open("about:blank");
         pageDocument = '<p>' + siteName[site] + '图片解析中... ...</p>';
@@ -72,4 +74,44 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle2="tooltip"]').tooltip();
     $('[data-toggle3="tooltip"]').tooltip();
+
+    function userLoginRecord() {
+        var myChart = echarts.init(document.getElementById('homePage'));
+        window.onresize = function () {
+            myChart.resize();
+        };
+
+        $.ajax({
+            url: "/userLoginRecordAjax",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'cross' }
+                    },
+                    xAxis: {
+                        name: '登录日期',
+                        data: [result[6]['login_day'], result[5]['login_day'], result[4]['login_day'], result[3]['login_day'], result[2]['login_day'], result[1]['login_day'], result[0]['login_day']]
+                    },
+                    yAxis: {
+                        name: '登陆次数'
+                    },
+                    series: [
+                        {
+                            name: '登陆次数',
+                            type: 'line',
+                            data: [result[6]['login_times'], result[5]['login_times'], result[4]['login_times'], result[3]['login_times'], result[2]['login_times'], result[1]['login_times'], result[0]['login_times']]
+                        }
+                    ]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
+    }
 });

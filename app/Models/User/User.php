@@ -16,10 +16,12 @@ class User extends Model
     /**
      * 
      */
-    public function getUserId($email)
+    public function getUserId($data)
     {
-        $userId = DB::select('select user_id from users where email = ?', [$email]);
-        return $userId;
+        $key = key($data);
+        $userId = DB::select('select user_id from users where ' . $key . ' = ?', [$data[$key]]);
+
+        return isset($userId[0]) ? $userId : '';
     }
 
     /**
@@ -136,5 +138,26 @@ class User extends Model
         DB::insert('insert into users (user_name, email, password, user_session, create_at, update_at, last_login_at, total_login_times) values (?, ?, ?, ?, ?, ?, ?, ?)', [$data['user_name'], $data['email'], $data['password'], $data['user_session'], $data['create_at'], $data['update_at'], $data['last_login_at'], $data['total_login_times']]);
 
         return $session;
+    }
+
+    /**
+     * 插入 user 登录记录
+     * table: user_login_record
+     * @param string $email
+     * @param string $timestamp
+     */
+    public function insertUserLoginRecord($email, $timestamp)
+    {
+        $data = [
+            'admin_email' => $email,
+        ];
+        $adminId = $this->getAdminId($data);
+
+        $insertData = [
+            'admin_id'    => $adminId,
+            'login_day'   => $timestamp,
+            'login_times' => 1,
+        ];
+        $affected = DB::insert('insert into admin_login_record (admin_id, login_day, login_times) values (?, ?, ?)', [$insertData['admin_id'], $insertData['login_day'], $insertData['login_times']]);
     }
 }

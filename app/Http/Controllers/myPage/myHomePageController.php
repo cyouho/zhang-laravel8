@@ -81,4 +81,23 @@ class myHomePageController extends Controller
             'min'  => date("H:i:s", $registerTime[0]['create_at']),
         ];
     }
+
+    public function userLoginRecordAjax()
+    {
+        $user = new User();
+        $adminId = $user->getUserId(['session' => $this->_session]);
+        $adminLoginRecord = $user->getAdminLoginRecord(['user_id' => $adminId]);
+
+        // 处理返回首页的数据
+        for ($i = 0; $i < 7; $i++) {
+            if (!isset($adminLoginRecord[$i])) {
+                array_push($adminLoginRecord, [
+                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
+                    'login_times' => 0,
+                ]);
+            }
+        }
+
+        return $adminLoginRecord ? response()->json($adminLoginRecord) : '';
+    }
 }

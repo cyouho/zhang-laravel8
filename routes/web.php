@@ -94,6 +94,10 @@ Route::middleware(['myPage'])->group(function () {
     Route::post('/resetPassword', [
         profileController::class, 'resetPassword'
     ]);
+
+    Route::post('/userLoginRecordAjax', [
+        myHomePageController::class, 'userLoginRecordAjax'
+    ]);
 });
 
 // admin route and route group.
