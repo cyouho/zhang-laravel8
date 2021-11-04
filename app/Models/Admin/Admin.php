@@ -127,6 +127,9 @@ class Admin extends Model
         $affected = DB::update('update admins set total_login_times = total_login_times + 1 where admin_email = ?', [$email]);
     }
 
+    /**
+     * 更新 admin 登录记录里的登录次数
+     */
     public function updateAdminLoginTimes($recordId)
     {
         $affected = DB::update('update admin_login_record set login_times = login_times + 1 where record_id = ?', [$recordId]);
