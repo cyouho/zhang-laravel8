@@ -58,9 +58,9 @@ class User extends Model
     /**
      * 
      */
-    public function updateLastLoginTime($email)
+    public function updateLastLoginTime($loginTime, $email)
     {
-        $affected = DB::update('update users set last_login_at = ? where email = ?', [time(), $email]);
+        $affected = DB::update('update users set last_login_at = ? where email = ?', [$loginTime, $email]);
     }
 
     /**
@@ -117,6 +117,46 @@ class User extends Model
     }
 
     /**
+     * 获取 user 的登录记录
+     */
+    public function getUserLoginRecord($data)
+    {
+        $key = key($data);
+        $result = DB::select('select from_unixtime(login_day, "%Y-%m-%d") as login_day, login_times from user_login_record where ' . $key . ' = ? and date_sub(curdate(), interval 7 day) <= from_unixtime(login_day, "%Y-%m-%d") order by login_day desc', [$data[$key]]);
+        $result = ControllersUtils::getArrFromObj($result);
+
+        return isset($result) ? $result : '';
+    }
+
+    /**
+     * 获取 user 登录记录方法
+     */
+    public function updateAdminLoginInfo($loginTime, $email)
+    {
+        $userId = $this->getUserId(['email' => $email]);
+        $result = DB::select('select record_id, login_day from user_login_record where from_unixtime(login_day, "%Y%m%d") = curdate() and user_id = ?', [$userId[0]->user_id]);
+
+        // 如果没有这天的记录就插入新的记录
+        if (!$result) {
+            $this->insertUserLoginRecord($email, $loginTime);
+        } else {
+            // 如果有记录就获取记录
+            $result = ControllersUtils::getArrFromObj($result);
+            $recordId = $result[0]['record_id'];
+            // 更新一次登录次数
+            $this->updateUserLoginTimes($recordId);
+        }
+    }
+
+    /**
+     * 更新 user 登录记录里的登录次数
+     */
+    public function updateUserLoginTimes($recordId)
+    {
+        $affected = DB::update('update user_login_record set login_times = login_times + 1 where record_id = ?', [$recordId]);
+    }
+
+    /**
      * 
      */
     public function RegisterSet($email, $password)
@@ -137,6 +177,9 @@ class User extends Model
         ];
         DB::insert('insert into users (user_name, email, password, user_session, create_at, update_at, last_login_at, total_login_times) values (?, ?, ?, ?, ?, ?, ?, ?)', [$data['user_name'], $data['email'], $data['password'], $data['user_session'], $data['create_at'], $data['update_at'], $data['last_login_at'], $data['total_login_times']]);
 
+        // 建立第一次 user 的登录信息
+        $this->insertUserLoginRecord($email, $timestamp);
+
         return $session;
     }
 
@@ -149,15 +192,16 @@ class User extends Model
     public function insertUserLoginRecord($email, $timestamp)
     {
         $data = [
-            'admin_email' => $email,
+            'email' => $email,
         ];
-        $adminId = $this->getAdminId($data);
+        $result = $this->getUserId($data);
+        $userId = isset($result[0]->user_id) ? $result[0]->user_id : '';
 
         $insertData = [
-            'admin_id'    => $adminId,
+            'user_id'     => $userId,
             'login_day'   => $timestamp,
             'login_times' => 1,
         ];
-        $affected = DB::insert('insert into admin_login_record (admin_id, login_day, login_times) values (?, ?, ?)', [$insertData['admin_id'], $insertData['login_day'], $insertData['login_times']]);
+        $affected = DB::insert('insert into user_login_record (user_id, login_day, login_times) values (?, ?, ?)', [$insertData['user_id'], $insertData['login_day'], $insertData['login_times']]);
     }
 }

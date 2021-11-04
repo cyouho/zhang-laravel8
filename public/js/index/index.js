@@ -104,7 +104,12 @@ $(document).ready(function () {
                         {
                             name: '登陆次数',
                             type: 'line',
-                            data: [result[6]['login_times'], result[5]['login_times'], result[4]['login_times'], result[3]['login_times'], result[2]['login_times'], result[1]['login_times'], result[0]['login_times']]
+                            data: [result[6]['login_times'], result[5]['login_times'], result[4]['login_times'], result[3]['login_times'], result[2]['login_times'], result[1]['login_times'], result[0]['login_times']],
+                            lineStyle: {
+                                normal: {
+                                    color: 'green',
+                                }
+                            }
                         }
                     ]
                 };

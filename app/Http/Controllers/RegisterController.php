@@ -34,7 +34,7 @@ class RegisterController extends Controller
         $test = new User();
         $email = $request->input('register_email');
         $password = $request->input('register_pwd');
-        $userId = $test->getUserId($email);
+        $userId = $test->getUserId(['email' => $email]);
 
         // 如果没有user ID就生成新的ID
         if (!$userId) {

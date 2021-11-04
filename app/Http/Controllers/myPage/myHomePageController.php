@@ -85,19 +85,19 @@ class myHomePageController extends Controller
     public function userLoginRecordAjax()
     {
         $user = new User();
-        $adminId = $user->getUserId(['session' => $this->_session]);
-        $adminLoginRecord = $user->getAdminLoginRecord(['user_id' => $adminId]);
+        $userId = $user->getUserId(['user_session' => $this->_session]);
+        $userLoginRecord = $user->getUserLoginRecord(['user_id' => $userId[0]->user_id]);
 
         // 处理返回首页的数据
         for ($i = 0; $i < 7; $i++) {
-            if (!isset($adminLoginRecord[$i])) {
-                array_push($adminLoginRecord, [
+            if (!isset($userLoginRecord[$i])) {
+                array_push($userLoginRecord, [
                     'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
                     'login_times' => 0,
                 ]);
             }
         }
 
-        return $adminLoginRecord ? response()->json($adminLoginRecord) : '';
+        return $userLoginRecord ? response()->json($userLoginRecord) : '';
     }
 }

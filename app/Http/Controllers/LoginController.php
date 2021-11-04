@@ -37,7 +37,7 @@ class LoginController extends Controller
         $user = new User();
         $email = $request->input('login_email');
         $password = $request->input('login_pwd');
-        $userId = $user->getUserId($email);
+        $userId = $user->getUserId(['email' => $email]);
         $data = [
             'email' => $email,
         ];
@@ -52,8 +52,13 @@ class LoginController extends Controller
             ]]);
         }
 
-        $user->updateLastLoginTime($email);
+        $loginTime = time();
+        $user->updateLastLoginTime($loginTime, $email);
         $user->updateTotalLoginTimes($email);
+
+        // 获取 admin 登录记录
+        $user->updateAdminLoginInfo($loginTime, $email);
+
         $cookie = $user->getSeesion($email);
         return response()->redirectTo('/')->cookie('_cyouho', $cookie, 60);
     }
