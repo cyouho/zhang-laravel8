@@ -26,7 +26,10 @@ $(document).ready(function () {
         resetAdminPwdAjaxPost(adminId, adminNewPwd)
     });
 
-    adminLoginRecord();
+    // 判断页面是否需要使用 echarts
+    if ($("#main").length > 0) {
+        adminLoginRecord();
+    }
 
     function createAdminAjaxPost(adminRole, adminEmail, adminPwd) {
         $.ajax({
@@ -101,6 +104,12 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
+                var loginDay = new Array();
+                var loginTimes = new Array();
+                for (var i = 0; i < result.length; i++) {
+                    loginDay.push(result[i]['login_day']);
+                    loginTimes.push(result[i]['login_times']);
+                }
                 var option = {
                     tooltip: {
                         trigger: 'axis',
@@ -108,7 +117,7 @@ $(document).ready(function () {
                     },
                     xAxis: {
                         name: '登录日期',
-                        data: [result[6]['login_day'], result[5]['login_day'], result[4]['login_day'], result[3]['login_day'], result[2]['login_day'], result[1]['login_day'], result[0]['login_day']]
+                        data: loginDay.reverse()
                     },
                     yAxis: {
                         name: '登陆次数'
@@ -117,7 +126,7 @@ $(document).ready(function () {
                         {
                             name: '登陆次数',
                             type: 'line',
-                            data: [result[6]['login_times'], result[5]['login_times'], result[4]['login_times'], result[3]['login_times'], result[2]['login_times'], result[1]['login_times'], result[0]['login_times']]
+                            data: loginTimes.reverse(),
                         }
                     ]
                 };

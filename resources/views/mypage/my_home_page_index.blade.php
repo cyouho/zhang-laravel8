@@ -20,7 +20,8 @@
             <h3>{{$myPageData['registerTime']['year']}}</h3>
             <h5>{{$myPageData['registerTime']['min']}}</h5>
         </div>
-    </div>
+    </div><br><br>
+    <h3 class="text-center">近7天登录情况一览</h3>
     <div id="homePage">
 
     </div>
