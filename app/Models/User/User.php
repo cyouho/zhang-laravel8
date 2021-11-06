@@ -117,12 +117,12 @@ class User extends Model
     }
 
     /**
-     * 获取 user 的登录记录
+     * 获取 user 近7天登录记录
      */
-    public function getUserLoginRecord($data)
+    public function getUserLoginRecord($data, $day = '7 day')
     {
         $key = key($data);
-        $result = DB::select('select from_unixtime(login_day, "%Y-%m-%d") as login_day, login_times from user_login_record where ' . $key . ' = ? and date_sub(curdate(), interval 7 day) <= from_unixtime(login_day, "%Y-%m-%d") order by login_day desc', [$data[$key]]);
+        $result = DB::select('select from_unixtime(login_day, "%Y-%m-%d") as login_day, login_times from user_login_record where ' . $key . ' = ? and date_sub(curdate(), interval ' . $day . ') <= from_unixtime(login_day, "%Y-%m-%d") order by login_day desc', [$data[$key]]);
         $result = ControllersUtils::getArrFromObj($result);
 
         return isset($result) ? $result : '';

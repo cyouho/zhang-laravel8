@@ -16,7 +16,7 @@
         <tbody>
             @if (isset($userData))
             <tr>
-                <td>{{$userData['user_id']}}</td>
+                <td id="user_id">{{$userData['user_id']}}</td>
                 <td>{{$userData['user_name']}}</td>
                 <td>{{$userData['email']}}</td>
                 <td>{{date("Y-m-d H:i:s", $userData['create_at'])}}</td>
@@ -29,7 +29,39 @@
             </tr>
             @endif
         </tbody>
-    </table><br>
+    </table><br><br>
+    <h1 class="text-center">用户登录记录</h1><br>
+    <div class="container">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+                <a id="seven_day_button" class="nav-link active" data-toggle="tab" href="#seven_day">近7天登录记录</a>
+            </li>
+            <li class="nav-item">
+                <a id="foruteen_day_button" class="nav-link" data-toggle="tab" href="#foruteen_day">近14天登录记录</a>
+            </li>
+            <li class="nav-item">
+                <a id="one_mouth_button" class="nav-link" data-toggle="tab" href="#one_mouth">近1个月登录记录</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="seven_day" class="container tab-pane active"><br>
+                <div id="seven_day_record">
+
+                </div>
+            </div>
+            <div id="foruteen_day" class="container tab-pane"><br>
+                <div id="fourteen_day_record" style="position: relative; width: 1080px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+
+                </div>
+            </div>
+            <div id="one_mouth" class="container tab-pane"><br>
+                <div id="one_mouth_record" style="position: relative; width: 1080px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
+
+                </div>
+            </div>
+        </div>
+    </div><br><br>
     <h1 class="text-center">管理员修改用户密码记录</h1><br>
     <table class="table table-dark table-hover">
         <thead>
