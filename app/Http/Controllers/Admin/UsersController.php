@@ -45,19 +45,63 @@ class UsersController extends Controller
         $userData = [
             'user_id' => isset($result[0]['user_id']) ? $result[0]['user_id'] : '',
         ];
+
+        $userLoginRecordOn7Day = $user->getUserLoginRecord($userData);
+        $userLoginRecordOn14Day = $user->getUserLoginRecord($userData, $day = '14 day');
+        $userLoginRecordOn30Day = $user->getUserLoginRecord($userData, $day = '30 day');
+        $userLoginRecordOn7DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn7Day, $date = 7);
+        $userLoginRecordOn14DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn14Day, $date = 14);
+        $userLoginRecordOn30DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn30Day, $date = 30);
+
+
         $resetPwdRecord = $admin->getResetUserPwdRecordByID($userData);
         //dd($resetPwdRecord);
 
         if (isset($result[0])) {
             $viewData = $result[0];
             return view('admin.users.detail.admin_user_detail_layer', [
-                'userData'        => $viewData,
-                'resetPwdRecord'  => $resetPwdRecord,
-                'totalResetTimes' => count($resetPwdRecord),
+                'userData'               => $viewData,
+                'resetPwdRecord'         => $resetPwdRecord,
+                'totalResetTimes'        => count($resetPwdRecord),
+                'userLoginRecordOn7Day'  => $userLoginRecordOn7DayResult,
+                'userLoginRecordOn14Day' => $userLoginRecordOn14DayResult,
+                'userLoginRecordOn30Day' => $userLoginRecordOn30DayResult,
             ]);
         }
 
         return view('admin.users.detail.admin_user_detail_layer');
+    }
+
+    /**
+     * 整理 user 登录记录
+     */
+    public function arrangeUserLoginRecord($record, $date)
+    {
+        // 处理返回首页的数据
+        for ($i = 0; $i < $date; $i++) {
+            if (!isset($record[$i])) {
+                array_push($record, [
+                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
+                    'login_times' => 0,
+                ]);
+            }
+        }
+
+        $recordDate = [];
+        array_pad($recordDate, $date, '');
+        $recordTimes = [];
+        array_pad($recordTimes, $date, 0);
+
+        foreach ($record as $key => $value) {
+            $recordDate[$key] = $value['login_day'];
+            $recordTimes[$key] = $value['login_times'];
+        }
+
+
+        return [
+            'date'  => array_reverse($recordDate),
+            'times' => array_reverse($recordTimes),
+        ];
     }
 
     /**
