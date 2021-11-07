@@ -46,14 +46,6 @@ class UsersController extends Controller
             'user_id' => isset($result[0]['user_id']) ? $result[0]['user_id'] : '',
         ];
 
-        $userLoginRecordOn7Day = $user->getUserLoginRecord($userData);
-        $userLoginRecordOn14Day = $user->getUserLoginRecord($userData, $day = '14 day');
-        $userLoginRecordOn30Day = $user->getUserLoginRecord($userData, $day = '30 day');
-        $userLoginRecordOn7DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn7Day, $date = 7);
-        $userLoginRecordOn14DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn14Day, $date = 14);
-        $userLoginRecordOn30DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn30Day, $date = 30);
-
-
         $resetPwdRecord = $admin->getResetUserPwdRecordByID($userData);
         //dd($resetPwdRecord);
 
@@ -63,9 +55,6 @@ class UsersController extends Controller
                 'userData'               => $viewData,
                 'resetPwdRecord'         => $resetPwdRecord,
                 'totalResetTimes'        => count($resetPwdRecord),
-                'userLoginRecordOn7Day'  => $userLoginRecordOn7DayResult,
-                'userLoginRecordOn14Day' => $userLoginRecordOn14DayResult,
-                'userLoginRecordOn30Day' => $userLoginRecordOn30DayResult,
             ]);
         }
 
@@ -148,5 +137,53 @@ class UsersController extends Controller
             'resetPwdRecord'  => $resetPwdRecord,
             'totalResetTimes' => count($resetPwdRecord),
         ]);
+    }
+
+    /**
+     * 获取 user 近7天登陆情况 ajax 方法
+     */
+    public function userLoginRecordOn7DayAjax(Request $request)
+    {
+        $user = new User();
+        $postData = $request->post();
+        $userId = [
+            'user_id' => $postData['userId'],
+        ];
+        $userLoginRecordOn7Day = $user->getUserLoginRecord($userId);
+        $userLoginRecordOn7DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn7Day, $date = 7);
+
+        return response()->json($userLoginRecordOn7DayResult);
+    }
+
+    /**
+     * 获取 user 近14天登陆情况 ajax 方法
+     */
+    public function userLoginRecordOn14DayAjax(Request $request)
+    {
+        $user = new User();
+        $postData = $request->post();
+        $userId = [
+            'user_id' => $postData['userId'],
+        ];
+        $userLoginRecordOn14Day = $user->getUserLoginRecord($userId);
+        $userLoginRecordOn14DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn14Day, $date = 14);
+
+        return response()->json($userLoginRecordOn14DayResult);
+    }
+
+    /**
+     * 获取 user 近30天登陆情况 ajax 方法
+     */
+    public function userLoginRecordOn30DayAjax(Request $request)
+    {
+        $user = new User();
+        $postData = $request->post();
+        $userId = [
+            'user_id' => $postData['userId'],
+        ];
+        $userLoginRecordOn30Day = $user->getUserLoginRecord($userId);
+        $userLoginRecordOn30DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn30Day, $date = 30);
+
+        return response()->json($userLoginRecordOn30DayResult);
     }
 }

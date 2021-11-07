@@ -63,31 +63,43 @@ $(document).ready(function () {
         window.onresize = function () {
             myChart.resize();
         };
-        var option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: { type: 'cross' }
+        $.ajax({
+            url: "/userLoginRecordOn7Day",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            xAxis: {
-                name: '登录日期',
-                //data: loginDay.reverse()
-                data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+            data: {
+                "userId": userId,
             },
-            yAxis: {
-                name: '登陆次数'
-            },
-            series: [
-                {
-                    name: '登陆次数',
-                    type: 'line',
-                    //data: loginTimes.reverse(),
-                    data: [1, 3, 4, 0, 5, 0, 3],
-                }
-            ]
-        };
+            success: function (data) {
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'cross' }
+                    },
+                    xAxis: {
+                        name: '登录日期',
+                        data: data['date'],
+                        //data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+                    },
+                    yAxis: {
+                        name: '登陆次数'
+                    },
+                    series: [
+                        {
+                            name: '登陆次数',
+                            type: 'line',
+                            data: data['times'],
+                            //data: [1, 3, 4, 0, 5, 0, 3],
+                        }
+                    ]
+                };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+        });
     }
 
     function userLoginRecordOn14Day(userId) {
@@ -95,31 +107,43 @@ $(document).ready(function () {
         window.onresize = function () {
             myChart14Day.resize();
         };
-        var option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: { type: 'cross' }
+        $.ajax({
+            url: "/userLoginRecordOn14Day",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            xAxis: {
-                name: '登录日期',
-                //data: loginDay.reverse()
-                data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+            data: {
+                "userId": userId,
             },
-            yAxis: {
-                name: '登陆次数'
-            },
-            series: [
-                {
-                    name: '登陆次数',
-                    type: 'line',
-                    //data: loginTimes.reverse(),
-                    data: [1, 1, 1, 0, 1, 0, 1],
-                }
-            ]
-        };
+            success: function (data) {
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'cross' }
+                    },
+                    xAxis: {
+                        name: '登录日期',
+                        data: data['date'],
+                        //data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+                    },
+                    yAxis: {
+                        name: '登陆次数'
+                    },
+                    series: [
+                        {
+                            name: '登陆次数',
+                            type: 'line',
+                            data: data['times'],
+                            //data: [1, 3, 4, 0, 5, 0, 3],
+                        }
+                    ]
+                };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart14Day.setOption(option);
+                // 使用刚指定的配置项和数据显示图表。
+                myChart14Day.setOption(option);
+            }
+        });
     }
 
     function userLoginRecordOn30Day(userId) {
@@ -127,30 +151,42 @@ $(document).ready(function () {
         window.onresize = function () {
             myChart30Day.resize();
         };
-        var option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: { type: 'cross' }
+        $.ajax({
+            url: "/userLoginRecordOn30Day",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            xAxis: {
-                name: '登录日期',
-                //data: loginDay.reverse()
-                data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+            data: {
+                "userId": userId,
             },
-            yAxis: {
-                name: '登陆次数'
-            },
-            series: [
-                {
-                    name: '登陆次数',
-                    type: 'line',
-                    //data: loginTimes.reverse(),
-                    data: [5, 5, 5, 5, 5, 5, 3],
-                }
-            ]
-        };
+            success: function (data) {
+                var option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: { type: 'cross' }
+                    },
+                    xAxis: {
+                        name: '登录日期',
+                        data: data['date'],
+                        //data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
+                    },
+                    yAxis: {
+                        name: '登陆次数'
+                    },
+                    series: [
+                        {
+                            name: '登陆次数',
+                            type: 'line',
+                            data: data['times'],
+                            //data: [1, 3, 4, 0, 5, 0, 3],
+                        }
+                    ]
+                };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart30Day.setOption(option);
+                // 使用刚指定的配置项和数据显示图表。
+                myChart30Day.setOption(option);
+            }
+        });
     }
 });

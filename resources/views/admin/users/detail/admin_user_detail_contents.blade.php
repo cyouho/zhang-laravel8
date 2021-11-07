@@ -50,12 +50,12 @@
 
                 </div>
             </div>
-            <div id="foruteen_day" class="container tab-pane"><br>
+            <div id="foruteen_day" class="container tab-pane fade"><br>
                 <div id="fourteen_day_record" style="position: relative; width: 1080px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
 
                 </div>
             </div>
-            <div id="one_mouth" class="container tab-pane"><br>
+            <div id="one_mouth" class="container tab-pane fade"><br>
                 <div id="one_mouth_record" style="position: relative; width: 1080px; height: 400px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
 
                 </div>
