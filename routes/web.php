@@ -161,4 +161,16 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/adminLoginRecordAjax', [
         AdminController::class, 'adminLoginRecordAjax'
     ]);
+
+    Route::post('/userLoginRecordOn7Day', [
+        UsersController::class, 'userLoginRecordOn7DayAjax'
+    ]);
+
+    Route::post('/userLoginRecordOn14Day', [
+        UsersController::class, 'userLoginRecordOn14DayAjax'
+    ]);
+
+    Route::post('/userLoginRecordOn30Day', [
+        UsersController::class, 'userLoginRecordOn30DayAjax'
+    ]);
 });
