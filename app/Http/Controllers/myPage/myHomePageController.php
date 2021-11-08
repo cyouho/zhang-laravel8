@@ -82,6 +82,10 @@ class myHomePageController extends Controller
         ];
     }
 
+    /**
+     * 获取 user 的登录记录 ajax 方法
+     * @return array $result
+     */
     public function userLoginRecordAjax()
     {
         $user = new User();
@@ -89,15 +93,31 @@ class myHomePageController extends Controller
         $userLoginRecord = $user->getUserLoginRecord(['user_id' => $userId[0]->user_id]);
 
         // 处理返回首页的数据
+        // 生成登录 '日期' 记录 '空白' 数组 | 'login_day' | $recordDate.length = $date
+        $recordDate = [];
+
+        // 生成登录 '次数' 记录 '空白' 数组 | 'login_times' | $recordTimes.length = $date
+        $recordTimes = [];
+        $recordTimes = array_pad($recordTimes, 7, 0);
+
         for ($i = 0; $i < 7; $i++) {
-            if (!isset($userLoginRecord[$i])) {
-                array_push($userLoginRecord, [
-                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
-                    'login_times' => 0,
-                ]);
+            // 生成 '指定日期长度'，'指定时间长度' 的数组 | $recordDate, $recordTimes
+            $recordDate[$i] = date('Y-m-d', strtotime('-' . $i . 'day'));
+            $recordTimes[$i] = 0;
+            // 比较指定日期在数据库中是否存在，
+            // 如果存在，就将对应日期的登录次数赋值给对应日期的 $recordTimes
+            for ($j = 0; $j < count($userLoginRecord); $j++) {
+                if ($recordDate[$i] == $userLoginRecord[$j]['login_day']) {
+                    $recordTimes[$i] = $userLoginRecord[$j]['login_times'];
+                }
             }
         }
 
-        return $userLoginRecord ? response()->json($userLoginRecord) : '';
+        $result =  [
+            'date'  => array_reverse($recordDate),
+            'times' => array_reverse($recordTimes),
+        ];
+
+        return $userLoginRecord ? response()->json($result) : '';
     }
 }

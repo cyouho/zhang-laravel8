@@ -91,12 +91,6 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                var loginDay = new Array();
-                var loginTimes = new Array();
-                for (var i = 0; i < result.length; i++) {
-                    loginDay.push(result[i]['login_day']);
-                    loginTimes.push(result[i]['login_times']);
-                }
                 var option = {
                     tooltip: {
                         trigger: 'axis',
@@ -104,7 +98,7 @@ $(document).ready(function () {
                     },
                     xAxis: {
                         name: '登录日期',
-                        data: loginDay.reverse()
+                        data: result['date']
                     },
                     yAxis: {
                         name: '登陆次数'
@@ -113,7 +107,7 @@ $(document).ready(function () {
                         {
                             name: '登陆次数',
                             type: 'line',
-                            data: loginTimes.reverse(),
+                            data: result['times'],
                             lineStyle: {
                                 color: 'green',
                             }

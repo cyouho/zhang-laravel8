@@ -283,15 +283,31 @@ class AdminController extends Controller
         $adminLoginRecord = $admin->getAdminLoginRecord(['admin_id' => $adminId]);
 
         // 处理返回首页的数据
+        // 生成登录 '日期' 记录 '空白' 数组 | 'login_day' | $recordDate.length = $date
+        $recordDate = [];
+
+        // 生成登录 '次数' 记录 '空白' 数组 | 'login_times' | $recordTimes.length = $date
+        $recordTimes = [];
+        $recordTimes = array_pad($recordTimes, 7, 0);
+
         for ($i = 0; $i < 7; $i++) {
-            if (!isset($adminLoginRecord[$i])) {
-                array_push($adminLoginRecord, [
-                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
-                    'login_times' => 0,
-                ]);
+            // 生成 '指定日期长度'，'指定时间长度' 的数组 | $recordDate, $recordTimes
+            $recordDate[$i] = date('Y-m-d', strtotime('-' . $i . 'day'));
+            $recordTimes[$i] = 0;
+            // 比较指定日期在数据库中是否存在，
+            // 如果存在，就将对应日期的登录次数赋值给对应日期的 $recordTimes
+            for ($j = 0; $j < count($adminLoginRecord); $j++) {
+                if ($recordDate[$i] == $adminLoginRecord[$j]['login_day']) {
+                    $recordTimes[$i] = $adminLoginRecord[$j]['login_times'];
+                }
             }
         }
 
-        return $adminLoginRecord ? response()->json($adminLoginRecord) : '';
+        $result =  [
+            'date'  => array_reverse($recordDate),
+            'times' => array_reverse($recordTimes),
+        ];
+
+        return $adminLoginRecord ? response()->json($result) : '';
     }
 }
