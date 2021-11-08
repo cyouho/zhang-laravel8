@@ -67,25 +67,24 @@ class UsersController extends Controller
     public function arrangeUserLoginRecord($record, $date)
     {
         // 处理返回首页的数据
+        // 生成登录 '日期' 记录 '空白' 数组 | 'login_day' | $recordDate.length = $date
+        $recordDate = [];
+
+        // 生成登录 '次数' 记录 '空白' 数组 | 'login_times' | $recordTimes.length = $date
+        $recordTimes = [];
+
         for ($i = 0; $i < $date; $i++) {
-            if (!isset($record[$i])) {
-                array_push($record, [
-                    'login_day'   => date('Y-m-d', strtotime('-' . $i . 'day')),
-                    'login_times' => 0,
-                ]);
+            // 生成 '指定日期长度'，'指定时间长度' 的数组 | $recordDate, $recordTimes
+            $recordDate[$i] = date('Y-m-d', strtotime('-' . $i . 'day'));
+            $recordTimes[$i] = 0;
+            // 比较指定日期在数据库中是否存在，
+            // 如果存在，就将对应日期的登录次数赋值给对应日期的 $recordTimes
+            for ($j = 0; $j < count($record); $j++) {
+                if ($recordDate[$i] == $record[$j]['login_day']) {
+                    $recordTimes[$i] = $record[$j]['login_times'];
+                }
             }
         }
-
-        $recordDate = [];
-        array_pad($recordDate, $date, '');
-        $recordTimes = [];
-        array_pad($recordTimes, $date, 0);
-
-        foreach ($record as $key => $value) {
-            $recordDate[$key] = $value['login_day'];
-            $recordTimes[$key] = $value['login_times'];
-        }
-
 
         return [
             'date'  => array_reverse($recordDate),
