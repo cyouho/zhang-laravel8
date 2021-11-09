@@ -23,17 +23,20 @@ $(document).ready(function () {
     // 判断页面是否需要使用 echarts
     if ($("#seven_day_record").length > 0) {
         userId = $("#user_id").text();
-        userLoginRecordOn7Day(userId);
+        recordDay = $("#seven_day").attr("value");
+        userLoginRecord(userId, recordDay);
     }
 
     if ($("#fourteen_day_record").length > 0) {
         userId = $("#user_id").text();
-        userLoginRecordOn14Day(userId);
+        recordDay = $("#foruteen_day").attr("value");
+        userLoginRecord(userId, recordDay);
     }
 
     if ($("#one_mouth_record").length > 0) {
         userId = $("#user_id").text();
-        userLoginRecordOn30Day(userId);
+        recordDay = $("#one_mouth").attr("value");
+        userLoginRecord(userId, recordDay);
     }
 
     function adminUserPwdResetAjaxPost(resetUserId, resetUserPwd) {
@@ -58,19 +61,39 @@ $(document).ready(function () {
         });
     }
 
-    function userLoginRecordOn7Day(userId) {
-        var myChart = echarts.init(document.getElementById('seven_day_record'));
-        window.onresize = function () {
-            myChart.resize();
-        };
+    // 获取 user 的登录记录 ajax 方法 | 7 day, 14 day, 30 day.
+    function userLoginRecord(userId, recordDay) {
+        switch (recordDay) {
+            case '7':
+                var myChart = echarts.init(document.getElementById('seven_day_record'));
+                window.onresize = function () {
+                    myChart.resize();
+                };
+                break;
+            case '14':
+                var myChart = echarts.init(document.getElementById('fourteen_day_record'));
+                window.onresize = function () {
+                    myChart.resize();
+                };
+                break;
+            case '30':
+                var myChart = echarts.init(document.getElementById('one_mouth_record'));
+                window.onresize = function () {
+                    myChart.resize();
+                };
+                break;
+            default:
+                break;
+        }
         $.ajax({
-            url: "/userLoginRecordOn7Day",
+            url: "/userLoginRecord",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
                 "userId": userId,
+                "recordDay": recordDay,
             },
             success: function (data) {
                 var option = {
@@ -98,94 +121,6 @@ $(document).ready(function () {
 
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
-            }
-        });
-    }
-
-    function userLoginRecordOn14Day(userId) {
-        var myChart14Day = echarts.init(document.getElementById('fourteen_day_record'));
-        window.onresize = function () {
-            myChart14Day.resize();
-        };
-        $.ajax({
-            url: "/userLoginRecordOn14Day",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                "userId": userId,
-            },
-            success: function (data) {
-                var option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { type: 'cross' }
-                    },
-                    xAxis: {
-                        name: '登录日期',
-                        data: data['date'],
-                        //data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
-                    },
-                    yAxis: {
-                        name: '登陆次数'
-                    },
-                    series: [
-                        {
-                            name: '登陆次数',
-                            type: 'line',
-                            data: data['times'],
-                            //data: [1, 3, 4, 0, 5, 0, 3],
-                        }
-                    ]
-                };
-
-                // 使用刚指定的配置项和数据显示图表。
-                myChart14Day.setOption(option);
-            }
-        });
-    }
-
-    function userLoginRecordOn30Day(userId) {
-        var myChart30Day = echarts.init(document.getElementById('one_mouth_record'));
-        window.onresize = function () {
-            myChart30Day.resize();
-        };
-        $.ajax({
-            url: "/userLoginRecordOn30Day",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                "userId": userId,
-            },
-            success: function (data) {
-                var option = {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: { type: 'cross' }
-                    },
-                    xAxis: {
-                        name: '登录日期',
-                        data: data['date'],
-                        //data: ['2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22', '2021-10-22'],
-                    },
-                    yAxis: {
-                        name: '登陆次数'
-                    },
-                    series: [
-                        {
-                            name: '登陆次数',
-                            type: 'line',
-                            data: data['times'],
-                            //data: [1, 3, 4, 0, 5, 0, 3],
-                        }
-                    ]
-                };
-
-                // 使用刚指定的配置项和数据显示图表。
-                myChart30Day.setOption(option);
             }
         });
     }

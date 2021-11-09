@@ -117,7 +117,7 @@ class User extends Model
     }
 
     /**
-     * 获取 user 近7天登录记录
+     * 获取 user 登录记录
      */
     public function getUserLoginRecord($data, $day = '7 day')
     {
