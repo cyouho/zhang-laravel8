@@ -139,50 +139,21 @@ class UsersController extends Controller
     }
 
     /**
-     * 获取 user 近7天登陆情况 ajax 方法
+     * 获取 user 登陆情况 ajax 方法 
+     * @param Request $request
+     * @return json $userLoginRecord
      */
-    public function userLoginRecordOn7DayAjax(Request $request)
+    public function userLoginRecordAjax(Request $request)
     {
         $user = new User();
         $postData = $request->post();
         $userId = [
             'user_id' => $postData['userId'],
         ];
-        $userLoginRecordOn7Day = $user->getUserLoginRecord($userId);
-        $userLoginRecordOn7DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn7Day, $date = 7);
+        $recordDay = $postData['recordDay'] . ' day';
+        $userLoginRecord = $user->getUserLoginRecord($userId, $recordDay);
+        $userLoginRecordResult = $this->arrangeUserLoginRecord($userLoginRecord, $recordDay);
 
-        return response()->json($userLoginRecordOn7DayResult);
-    }
-
-    /**
-     * 获取 user 近14天登陆情况 ajax 方法
-     */
-    public function userLoginRecordOn14DayAjax(Request $request)
-    {
-        $user = new User();
-        $postData = $request->post();
-        $userId = [
-            'user_id' => $postData['userId'],
-        ];
-        $userLoginRecordOn14Day = $user->getUserLoginRecord($userId);
-        $userLoginRecordOn14DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn14Day, $date = 14);
-
-        return response()->json($userLoginRecordOn14DayResult);
-    }
-
-    /**
-     * 获取 user 近30天登陆情况 ajax 方法
-     */
-    public function userLoginRecordOn30DayAjax(Request $request)
-    {
-        $user = new User();
-        $postData = $request->post();
-        $userId = [
-            'user_id' => $postData['userId'],
-        ];
-        $userLoginRecordOn30Day = $user->getUserLoginRecord($userId);
-        $userLoginRecordOn30DayResult = $this->arrangeUserLoginRecord($userLoginRecordOn30Day, $date = 30);
-
-        return response()->json($userLoginRecordOn30DayResult);
+        return response()->json($userLoginRecordResult);
     }
 }
