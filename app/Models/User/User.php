@@ -39,7 +39,10 @@ class User extends Model
     }
 
     /**
-     * 
+     * 检查 user 输入的密码是否和数据库里的密码匹配
+     * @param string $password
+     * @param array $data
+     * @return bool
      */
     public function checkUserPwd($password, $data)
     {
@@ -50,7 +53,10 @@ class User extends Model
     }
 
     /**
-     * 
+     * 更新 user 的密码
+     * @param string $password
+     * @param array $data
+     * @return int $affected
      */
     public function updateUserPwd($password, $data)
     {
