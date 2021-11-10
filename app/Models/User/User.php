@@ -14,7 +14,9 @@ class User extends Model
     use HasFactory;
 
     /**
-     * 
+     * 获取 user 的 Id
+     * @param array $data
+     * @return object $userId
      */
     public function getUserId($data)
     {
@@ -25,7 +27,9 @@ class User extends Model
     }
 
     /**
-     * 
+     * 获取 user 的 session
+     * @param string $email
+     * @return string $session
      */
     public function getSeesion($email)
     {
