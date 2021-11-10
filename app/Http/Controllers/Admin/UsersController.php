@@ -63,6 +63,9 @@ class UsersController extends Controller
 
     /**
      * 整理 user 登录记录
+     * @param array $record | 数据库中查询到的原始登录记录数组
+     * @param int $date | 整理记录所需要的天数 e.g. 7, 14, 30 day
+     * @return array ['date', 'times'] | 整理好的日期以及次数
      */
     public function arrangeUserLoginRecord($record, $date)
     {
