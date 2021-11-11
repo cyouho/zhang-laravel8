@@ -38,6 +38,11 @@ class Admin extends Model
         return $adminId[0]['admin_id'];
     }
 
+    /**
+     * 获取 admin 的名字
+     * @param string $cookie
+     * @return string $adminName
+     */
     public function getAdminName($cookie)
     {
         $data = DB::select('select admin_name from admins where admin_session = ?', [$cookie]);
@@ -47,7 +52,9 @@ class Admin extends Model
     }
 
     /**
-     * 
+     * 获取 admin 的角色
+     * @param array $data
+     * @return string
      */
     public function getAdminRole($data)
     {
@@ -58,6 +65,11 @@ class Admin extends Model
         return $this->_role[$adminRole[0]['role']];
     }
 
+    /**
+     * 获取 admin 的session
+     * @param string $email
+     * @return string $session
+     */
     public function getSeesion($email)
     {
         $data = DB::select('select admin_session from admins where admin_email = ?', [$email]);
@@ -65,6 +77,10 @@ class Admin extends Model
         return $session;
     }
 
+    /**
+     * 获取 admin 的所有信息
+     * @return array $data
+     */
     public function getAllAdminInfo()
     {
         $data = DB::select('select admin_id, role, admin_name, admin_email, create_at, last_login_at, total_login_times from admins');
@@ -72,6 +88,11 @@ class Admin extends Model
         return $data;
     }
 
+    /**
+     * 获取 admin 的最后登录时间
+     * @param string $session
+     * @return string
+     */
     public function getLastLoginTime($session)
     {
         $data = DB::select('select last_login_at from admins where admin_session = ?', [$session]);
