@@ -16,6 +16,9 @@ class Admin extends Model
 
     private $_role;
 
+    /**
+     * 获取 admin 的配置文件内容 | e.g. role (admin 角色)
+     */
     public function __construct()
     {
         $this->_role = config('admin.role');
@@ -100,6 +103,11 @@ class Admin extends Model
         return $result[0]['last_login_at'] ? $result[0]['last_login_at'] : '';
     }
 
+    /**
+     * 获取 admin 的总登录次数
+     * @param string $session
+     * @return string $result
+     */
     public function getTotalLoginTimes($session)
     {
         $data = DB::select('select total_login_times from admins where admin_session = ?', [$session]);
@@ -107,6 +115,11 @@ class Admin extends Model
         return $result[0]['total_login_times'] ? $result[0]['total_login_times'] : '';
     }
 
+    /**
+     * 获取 admin 的注册时间
+     * @param $session
+     * @return string $result
+     */
     public function getRegisterTime($session)
     {
         $data = DB::select('select create_at from admins where admin_session = ?', [$session]);
@@ -114,6 +127,11 @@ class Admin extends Model
         return $result[0]['create_at'] ? $result[0]['create_at'] : '';
     }
 
+    /**
+     * 获取 user 重置密码的记录 by ID
+     * @param array $data
+     * @return array $result
+     */
     public function getResetUserPwdRecordByID($data)
     {
         $key = key($data);
@@ -122,6 +140,10 @@ class Admin extends Model
         return isset($result) ? $result : '';
     }
 
+    /**
+     * 获取 user 重置密码记录 | 暂时未被使用！
+     * @return array $result
+     */
     public function getResetUserPwdRecord()
     {
         $result = DB::select('select admin_id, user_id, admin_name, update_at from reset_pwd_record');
