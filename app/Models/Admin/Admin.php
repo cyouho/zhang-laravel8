@@ -151,6 +151,11 @@ class Admin extends Model
         return isset($result) ? $result : '';
     }
 
+    /**
+     * 获取 admin 的登录记录
+     * @param array $data
+     * @return array $result | ''
+     */
     public function getAdminLoginRecord($data)
     {
         $key = key($data);
@@ -160,6 +165,11 @@ class Admin extends Model
         return isset($result) ? $result : '';
     }
 
+    /**
+     * 更新 admin 的最后登录时间
+     * @param string $email
+     * @param string $loginTime
+     */
     public function updateLastLoginTime($email, $loginTime)
     {
         $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [$loginTime, $email]);
