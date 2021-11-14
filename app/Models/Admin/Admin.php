@@ -175,6 +175,10 @@ class Admin extends Model
         $affected = DB::update('update admins set last_login_at = ? where admin_email = ?', [$loginTime, $email]);
     }
 
+    /**
+     * 更新 admin 的总登录次数
+     * @param string $email
+     */
     public function updateTotalLoginTimes($email)
     {
         $affected = DB::update('update admins set total_login_times = total_login_times + 1 where admin_email = ?', [$email]);
@@ -205,6 +209,12 @@ class Admin extends Model
         }
     }
 
+    /**
+     * 检查 admin 的密码
+     * @param string $password
+     * @param array $data
+     * @return bool
+     */
     public function checkUserPwd($password, $data)
     {
         $key = key($data);
@@ -213,6 +223,13 @@ class Admin extends Model
         return Hash::check($password, (string)$hashPwd);
     }
 
+    /**
+     * 注册 admin
+     * @param string $email
+     * @param string $password
+     * @param int $role
+     * @return string $session
+     */
     public function RegisterSet($email, $password, $role)
     {
         $adminName = Utils::getNameFromEmail($email);
