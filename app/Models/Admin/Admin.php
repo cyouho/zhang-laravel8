@@ -255,6 +255,12 @@ class Admin extends Model
         return $session;
     }
 
+    /**
+     * 插入 admin 修改 user 密码记录
+     * @param string $adminId
+     * @param string $adminName
+     * @param string $userId
+     */
     public function insertUserPwdUpdateRecord($adminId, $adminName, $userId)
     {
         $timestamp = time();
@@ -289,6 +295,11 @@ class Admin extends Model
         $affected = DB::insert('insert into admin_login_record (admin_id, login_day, login_times) values (?, ?, ?)', [$insertData['admin_id'], $insertData['login_day'], $insertData['login_times']]);
     }
 
+    /**
+     * 删除 admin 账号
+     * @param string $adminId
+     * @return bool $affected | 数据库被影响的行数
+     */
     public function deleteAdmin($adminId)
     {
         $affected = DB::delete('delete from admins where admin_id = ?', [$adminId]);
@@ -296,6 +307,12 @@ class Admin extends Model
         return $affected;
     }
 
+    /**
+     * 更新 admin 密码
+     * @param string $password
+     * @param array $data
+     * @return bool $affected | 数据库被影响的行数
+     */
     public function updateAdminPwd($password, $data)
     {
         $key = key($data);
