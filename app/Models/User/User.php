@@ -66,7 +66,9 @@ class User extends Model
     }
 
     /**
-     * 
+     * 更新 user 最后登录时间
+     * @param string $loginTime
+     * @param string $email
      */
     public function updateLastLoginTime($loginTime, $email)
     {
@@ -74,7 +76,8 @@ class User extends Model
     }
 
     /**
-     * 
+     * 更新 user 总登录次数
+     * @param string $email
      */
     public function updateTotalLoginTimes($email)
     {
@@ -82,7 +85,9 @@ class User extends Model
     }
 
     /**
-     * 
+     * 获取 user 用户名
+     * @param string $session
+     * @return string $userName[0][''user_name]
      */
     public function getUserName($session)
     {
