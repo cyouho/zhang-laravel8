@@ -98,7 +98,9 @@ class User extends Model
     }
 
     /**
-     * 
+     * 获取 user 最后登录时间
+     * @param string $session
+     * @return array $data
      */
     public function getLastLoginTime($session)
     {
@@ -107,7 +109,9 @@ class User extends Model
     }
 
     /**
-     * 
+     * 获取 user 总登录次数
+     * @param string $session
+     * @return array $data
      */
     public function getTotalLoginTimes($session)
     {
